@@ -6,8 +6,8 @@
 package es.albarregas.Controladores;
 
 import es.albarregas.beans.Clientes;
-import es.albarregas.beans.Usuarios;
-import es.albarregas.dao.IClientesDAO;
+import es.albarregas.beans.Pedidos;
+import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Oscar
  */
-@WebServlet(name = "PanelCliente", urlPatterns = {"/PanelCliente"})
-public class PanelCliente extends HttpServlet {
+@WebServlet(name = "Carrito", urlPatterns = {"/Carrito"})
+public class Carrito extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,28 +38,16 @@ public class PanelCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
-        IClientesDAO cdao = daof.getClientesDAO();
-        if (request.getParameter("cancelar") != null) {
-            response.sendRedirect("JSP/panelUsuario.jsp");
-        } else if (request.getParameter("aceptar") != null) {
-            HttpSession sesion = request.getSession(true);
-            Clientes cliente = new Clientes();
-            cliente.setNombre(request.getParameter("nombre"));
-            cliente.setApellidos(request.getParameter("apellidos"));
-            cliente.setNif(request.getParameter("nif"));
-            cliente.setFechaNacimiento(Date.valueOf(request.getParameter("fnacimiento")));
-            
-            Usuarios usuario=(Usuarios)sesion.getAttribute("sesion");
-            System.out.println(usuario.getIdUsuario());
-            cliente.setIdCliente(usuario.getIdUsuario());
-            Clientes cli2 = (Clientes) sesion.getAttribute("cliente");
-            if(!cliente.getNombre().equals(cli2.getNombre())||!cliente.getApellidos().equals(cli2.getApellidos()) || !cliente.getNif().equals(cli2.getNif()) || !cliente.getFechaNacimiento().equals(cli2.getFechaNacimiento())){
-            cdao.updateClientes(cliente);
-            cliente.setFechaAlta(cli2.getFechaAlta());
-            sesion.setAttribute("cliente", cliente);
-            }
-            response.sendRedirect("JSP/panelUsuario.jsp");
-        }
+        IPedidosDAO pdao = daof.getPedidosDAO();
+        Pedidos pedido = new Pedidos();
+        
+        pedido.setEstado("n");
+        HttpSession sesion = request.getSession();
+        Clientes cliente=(Clientes)sesion.getAttribute("cliente");
+        pedido.setIdCliente(cliente.getIdCliente());
+        pdao.addPedido(pedido);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -60,6 +60,8 @@ public class Login extends HttpServlet {
             cli=cdao.getOne(where2);
             usu3.setIdUsuario(idUsuario);
             sesion.setAttribute("sesion", usu3);
+            cli.setIdCliente(idUsuario);
+                System.out.println(idUsuario);
             sesion.setAttribute("cliente", cli);
             }else{
                 request.setAttribute("error3", "Este email ya esta registrado");
@@ -77,6 +79,7 @@ public class Login extends HttpServlet {
                 String where2="Where IdCliente="+idCliente;
                 cli=cdao.getOne(where2);
                 sesion.setAttribute("sesion", usu);
+                cli.setIdCliente(idCliente);
                 sesion.setAttribute("cliente", cli);
             }else{
                 request.setAttribute("error2", "Clave incorrecta");

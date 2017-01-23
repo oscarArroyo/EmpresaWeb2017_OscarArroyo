@@ -56,7 +56,7 @@
                     </div>
                     <div class=" col-sm-7 col-xs-6 caracteristicas">
                         <c:if test="${sesion!=null}">
-                        <button class="compra btn btn-success text-center"  value="">A&ntilde;adir al carro</button>
+                            <a href="${contexto}/Carrito"><button class="compra btn btn-success text-center"  value="">A&ntilde;adir al carro</button></a>
                         </c:if>
                         <h5 class="pvp text-center">Precio: <c:out value="${pro.precioUnitario}"/>&euro; </h5>
                         <h5>Denominaci&oacute;n: <c:out value="${pro.denominacion}"/> </h5>
