@@ -35,6 +35,7 @@
                         <div class="errores">
                             <c:out value="${error}" default=" "></c:out>
                             <c:out value="${error2}" default=" "></c:out>
+                            <c:out value="${error3}" default=" "></c:out>
                             </div>
                             <div class="lg">
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login-modal"><a href="#">Login</a></button>
@@ -55,13 +56,17 @@
                             </div>
                         </div>
                         <button type="button" class="reg btn btn-default"><a href="${contexto}/JSP/registro.jsp">Registro</a></button>
-                        <a href="${contexto}/JSP/producto.jsp">Producto</a>
                     </c:when>
                     <c:otherwise>
                         <div class="usu-log">
-                            <a href="#" class="lista"><i class="fa fa-user-o fa-1x" aria-hidden="true"></i>Panel del usuario: <c:out value="${sesion.email}"></c:out><br/></a>
+                            <a href="${contexto}/JSP/panelUsuario.jsp" class="lista"><i class="fa fa-user-o fa-1x" aria-hidden="true"></i>Panel del usuario: <c:out value="${sesion.email}"></c:out><br/></a>
                             <a href="${contexto}/Login?cs=s" class="lista"><i class="fa fa-window-close-o fa-1x" aria-hidden="true"></i>Cerrar sesi&oacute;n</a>
+                            
+
                         </div>
+                            <div class="carrito text-center">
+                            <i class="fa fa-cart-plus fa-3x carro" aria-hidden="true"></i>
+                            </div>
                     </c:otherwise>
                 </c:choose>
             </div>

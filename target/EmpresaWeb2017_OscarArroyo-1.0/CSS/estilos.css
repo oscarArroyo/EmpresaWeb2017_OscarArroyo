@@ -213,7 +213,7 @@ a:link{
     color: black;
 }
 .table td{
-    min-width: 150px;
+    min-width: 170px;
 }
 
 .main{
@@ -566,21 +566,79 @@ label{
     font: 18px bold sans-serif;
     color:red;
 }
-.inf-slider{
+.inf-slider a{
     background-color:rgba(255,255,255,0.3);
     color:#08d8df;
     font:bold 28px Verdana;
 }
-.usu-log{
+.usu-log {
     margin-top: 2rem;
-    border: 3px #08d8df solid;
+    border: 3px #d9edf7 solid;
     text-align: center;
     font:bold 18px Verdana;
     text-decoration: none;
     color: black;
 }
+.usu-log a{
+    font:16px Verdana;
+    text-decoration: none;
+    color: black;
+}
+.usu-log a:hover{
+    color:#d9edf7;
+    text-decoration: none;
+}
 .page-link{
     min-width: 4rem;
     text-align: center;
     max-width: 4rem;
+}
+.contenedor-producto{
+    margin-top: 8rem;
+    border: 3px solid #438e86;
+    background-color: whitesmoke;
+}
+.carousel-pro{
+    margin-bottom: 1rem;
+    margin-top: 8rem;
+    
+}
+.caracteristicas h5,.caracteristicas{
+    margin-top: 2rem;
+    font-size: 14px;
+    font-family: Verdana;
+    font-weight: bold;
+}
+.toppad{
+    margin-top:2rem;
+}
+.table-user-information td{
+    background-color: #b7b7b7;
+}
+.fa-user-circle-o{
+    color: #d9edf7;
+}
+.botones{
+    display: block;
+    margin: 1rem auto;
+}
+.carro{
+    color:#d9edf7;
+}
+.caracteristicas .pvp {
+    width: auto;
+    border:1px solid #438e86;
+    background-color:#a3a3a3;
+    color: black;
+    font-size: 28px;
+    font-family: Verdana;
+    font-weight: bold;
+}
+.caracteristicas .pvp{
+    margin: 0 auto;
+}
+.compra {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #438e86;
 }

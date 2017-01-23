@@ -45,7 +45,7 @@
                                         <div class="item">
                                             <a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imgslider" src="imagenesProductos/${productos.imagen}"></a> 
                                             <div class="inf-slider carousel-caption">
-                                                <c:out value="${productos.denominacion}"/>
+                                                <a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a>
                                             </div>
                                         </div>
                                     </c:if>

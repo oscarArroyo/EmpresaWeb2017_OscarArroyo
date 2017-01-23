@@ -90,9 +90,9 @@
                     <thead>
                         <th>Paginacion nº de registros </th>
                         <th> <div>
-                                <form action="#" name="formulario">  
+                                <form action="#" name="formulario" method="post">  
                                     <input style="width: 16rem;" type="number" min="5" max="250" name="pag" required placeholder="Nº de registros">
-                                    <input type="submit" onclick="pagination(document.formulario.pag.value);" value="Registros">
+                                    <input type="button" onclick="pagination(document.formulario.pag.value);" value="Registros">
                                 </form>
                             </div>
                         </th>
@@ -100,18 +100,18 @@
                     <thead>
                         <tr>
                             <th>Imagen</th>
-                            <th>Denominacion</th>
+                            <th class="denominacion">Denominacion <i class="fa fa-sort" aria-hidden="true"></i></th>
                             <th>Categoria</th>
                             <th>Marca</th>
-                            <th>Precio/&euro;</th>
+                            <th class="precio">Precio/&euro; <i class="fa fa-sort" aria-hidden="true"></i></th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${prods}" var="productos">
                             <c:if test="${productos.categoria==param.c}">
                                 <tr>
-                                    <td><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"</td>
-                                    <td class="txt"><c:out value="${productos.denominacion}"/></td>
+                                    <td><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"/></a></td>
+                                    <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>
                                     <td class="txt"><a href="${contexto}/JSP/categorias.jsp?c=${productos.categoria}"><c:out value="${productos.categoria}"/></a></td>
                                     <td class="txt"><a href="${contexto}/JSP/marcas.jsp?p=${productos.marca}"><c:out value="${productos.marca}"/></a></td>
                                     <td class="txt"><c:out value="${productos.precioUnitario}"/></td>
@@ -129,6 +129,52 @@
     </div>
     
     <jsp:include page="../INC/pie.jsp"/> 
+    <script>
+             function sortTable(f, n) {
+                var rows = $('.table tbody  tr').get();
+
+                rows.sort(function (a, b) {
+
+                    var A = getVal(a);
+                    var B = getVal(b);
+
+                    if (A < B) {
+                        return -1 * f;
+                    }
+                    if (A > B) {
+                        return 1 * f;
+                    }
+                    return 0;
+                });
+
+                function getVal(elm) {
+                    var v = $(elm).children('td').eq(n).text().toUpperCase();
+                    if ($.isNumeric(v)) {
+                        v = parseFloat(v, 10);
+                    }
+                    return v;
+                }
+
+                $.each(rows, function (index, row) {
+                    $('.table').children('tbody').append(row);
+                });
+            }
+            var denom = 1;
+            var pre = 1;
+            $(".denominacion").click(function () {
+                denom *= -1;
+                var n = $(this).prevAll().length;
+                sortTable(denom, n);
+                pagination(10);
+            });
+            $(".precio").click(function () {
+                pre *= -1;
+                var n = $(this).prevAll().length;
+                sortTable(pre, n);
+                pagination(10);
+            });
+
+        </script>
 </body>
 </html>
 

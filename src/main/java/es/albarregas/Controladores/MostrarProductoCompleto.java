@@ -38,9 +38,6 @@ public class MostrarProductoCompleto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println("Entro en el servlet");
-        out.println("IdProducto:" +request.getParameter("producto"));
         DAOFactory daof = DAOFactory.getDAOFactory(1);
         IProductosDAO pdao= daof.getProductosDAO();
         IImagenesDAO idao= daof.getImagenesDAO();
@@ -49,7 +46,6 @@ public class MostrarProductoCompleto extends HttpServlet {
         ArrayList<String> imagenes = idao.getImagenes(where);
         ArrayList<CaractProds> cp = cdao.getCaractProds(where);
         Productos pro = pdao.getOne(where);
-        out.println("Ejecuto la Query");
         request.setAttribute("pro", pro);
         request.setAttribute("imagenes", imagenes);
         request.setAttribute("cp", cp);

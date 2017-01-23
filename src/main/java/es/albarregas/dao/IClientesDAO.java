@@ -5,6 +5,8 @@
  */
 package es.albarregas.dao;
 
+import es.albarregas.beans.Clientes;
+
 
 /**
  *
@@ -13,4 +15,6 @@ package es.albarregas.dao;
 public interface IClientesDAO {
     public void inicializarClientes(int idUsuario);
     public void closeConnection();
+    public Clientes getOne(String where);
+    public void updateClientes(Clientes cliente);
 }

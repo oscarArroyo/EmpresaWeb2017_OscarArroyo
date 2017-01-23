@@ -15,47 +15,74 @@
         <link href="${contexto}/CSS/estilos.css" rel ="stylesheet">
         <script type="text/javascript" language="javascript" src="${contexto}/BOOTSTRAP/jquery-3.1.1.js"></script>
         <script src="${contexto}/BOOTSTRAP/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Producto</title>
     </head>
     <body>
         <div class="container-fluid">
             <jsp:include page="../INC/cabecera.jsp"/>
             <div class="row">
-                <div class="col-sm-8 col-xs-12 col-sm-offset-2">
-                    <c:out value="${pro.denominacion}"/>
-                    <c:out value="${pro.descripcion}"/>
-                    <c:out value="${pro.stock}"/>
-                    <c:out value="${pro.marca}"/>
-                    <c:out value="${pro.categoria}"/>
-                    <c:forEach items="${imagenes}" var="imagen">
-                        <c:out value="${imagen}"/>
-                    </c:forEach>
-                    <c:forEach items="${cp}" var="CaractProd">
-                        <c:out value="${CaractProd.nombre}"/>
-                        <c:out value="${CaractProd.descripcion}"/>
-                    </c:forEach>
-                    <div class="preview-pic tab-content img-grande">
-                        <div class="tab-pane active" id="pic-1"><img class="img-act" src="${contexto}/imagenesProductos/9016.1.jpg" /></div>
-                        <div class="tab-pane" id="pic-2"><img class="img-act" src="${contexto}/imagenesProductos/1005.2.jpg" /></div>
-                        <div class="tab-pane" id="pic-3"><img class="img-act" src="${contexto}/imagenesProductos/1005.3.jpg" /></div>
-                        <div class="tab-pane" id="pic-4"><img class="img-act" src="${contexto}/imagenesProductos/1005.4.jpg" /></div>
-                        <div class="tab-pane" id="pic-5"><img class="img-act" src="${contexto}/imagenesProductos/1005.5.jpg" /></div>
-                    </div>
-                    <ul class="preview-thumbnail nav nav-tabs">
-                        <li class="enlace"><a data-target="#pic-1" data-toggle="tab"><img  class="img-prod" src="${contexto}/imagenesProductos/9016.1.jpg" /></a></li>
-                        <li class="enlace"><a data-target="#pic-2" data-toggle="tab"><img  class="img-prod" src="${contexto}/imagenesProductos/1005.2.jpg" /></a></li>
-                        <li class="enlace"><a data-target="#pic-3" data-toggle="tab"><img  class="img-prod" src="${contexto}/imagenesProductos/1005.3.jpg" /></a></li>
-                        <li class="enlace"><a data-target="#pic-4" data-toggle="tab"><img  class="img-prod" src="${contexto}/imagenesProductos/1005.4.jpg" /></a></li>
-                        <li class="enlace"><a data-target="#pic-5" data-toggle="tab"><img  class="img-prod" src="${contexto}/imagenesProductos/1005.5.jpg" /></a></li>
-                    </ul>
-                    <div class="details col-md-6">
-                        <div class="action">
-                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+
+                <div class="col-sm-8 col-xs-12 col-sm-offset-2 contenedor-producto"> 
+                    
+                        
+                    
+                    <div class="col-xs-12 col-sm-5 carousel-pro">
+                        
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <c:set var="contador" value="0"/>
+                                <c:forEach items="${imagenes}" var="imagen">
+                                    <li data-target="#carousel-example-generic" data-slide-to="${contador}">
+                                        <c:set var="contador" value="${contador+1}"/> </li>
+                                    </c:forEach>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <c:forEach items="${imagenes}" var="imagen">
+                                    <div class="item">
+                                        <img class="imgslider" src="imagenesProductos/${imagen}">
+                                    </div>
+                                </c:forEach>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
-                </div>
+                    <div class=" col-sm-7 col-xs-6 caracteristicas">
+                        <c:if test="${sesion!=null}">
+                        <button class="compra btn btn-success text-center"  value="">A&ntilde;adir al carro</button>
+                        </c:if>
+                        <h5 class="pvp text-center">Precio: <c:out value="${pro.precioUnitario}"/>&euro; </h5>
+                        <h5>Denominaci&oacute;n: <c:out value="${pro.denominacion}"/> </h5>
+                        <h5>Descripci&oacute;n: <c:out value="${pro.descripcion}"/></h5>
+                        <h5>Stock: <c:out value="${pro.stock}"/></h5>
+                        <h5>Marca: <c:out value="${pro.marca}"/></h5>
+                        <h5>Categor&iacute;a:  <c:out value="${pro.categoria}"/></h5>
+                        <h5>Caracter&iacute;sticas: </h5>
+                        <ul>
+
+                            <c:forEach items="${cp}" var="CaractProd">
+                                <li><c:out value="${CaractProd.nombre}"/> :
+                                    <c:out value="${CaractProd.descripcion}"/> </li>
+
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div> 
             </div>
+            <script>
+                $(".carousel-indicators li:first").addClass("active");
+                $(".carousel-inner .item:first").addClass("active");
+            </script>    
+
         </div>
         <jsp:include page="../INC/pie.jsp"/> 
+
     </body>
 </html>
