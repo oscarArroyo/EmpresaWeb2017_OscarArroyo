@@ -5,6 +5,7 @@
  */
 package es.albarregas.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -21,6 +22,15 @@ public class Pedidos {
     private double gastosEnvio;
     private double iva;
     private int idDireccion;
+    private ArrayList<LineasPedidos> lineasPedidos;
+
+    public ArrayList<LineasPedidos> getLineasPedidos() {
+        return lineasPedidos;
+    }
+
+    public void setLineasPedidos(ArrayList<LineasPedidos> lineasPedidos) {
+        this.lineasPedidos = lineasPedidos;
+    }
 
     public int getIdPedido() {
         return idPedido;
