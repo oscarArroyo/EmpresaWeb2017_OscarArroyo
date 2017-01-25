@@ -56,12 +56,10 @@ public class Login extends HttpServlet {
             int idUsuario = usu2.getIdUsuario();
             cdao.inicializarClientes(idUsuario);
             String where2="Where IdCliente="+idUsuario;
-                System.out.println(idUsuario);
             cli=cdao.getOne(where2);
             usu3.setIdUsuario(idUsuario);
             sesion.setAttribute("sesion", usu3);
             cli.setIdCliente(idUsuario);
-                System.out.println(idUsuario);
             sesion.setAttribute("cliente", cli);
             }else{
                 request.setAttribute("error3", "Este email ya esta registrado");

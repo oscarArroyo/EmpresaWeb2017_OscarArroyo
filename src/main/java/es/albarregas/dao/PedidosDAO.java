@@ -6,9 +6,10 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Pedidos;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -19,6 +20,7 @@ public class PedidosDAO implements IPedidosDAO{
     Pedidos pedido;
     String consulta;
     PreparedStatement preparada;
+    Statement sentencia;
     @Override
     public void addPedido(Pedidos pedido) {
          consulta = "insert into pedidos(fecha,estado,idCliente) values(now(),?,?)";
@@ -33,10 +35,30 @@ public class PedidosDAO implements IPedidosDAO{
             this.closeConnection();
         }
     }
+    @Override
+    public Pedidos getOne(String where) {
+        consulta ="select IdPedido from pedidos " +where;
+        try {
+            sentencia = ConnectionFactory.getConnection().createStatement();
+            try (ResultSet resultado = sentencia.executeQuery(consulta)) {
+                while (resultado.next()){
+                    pedido=new Pedidos();
+                    pedido.setIdPedido(resultado.getInt("IdPedido"));
+                    }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
+        return pedido;
+    }
 
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
+
+    
     
 }

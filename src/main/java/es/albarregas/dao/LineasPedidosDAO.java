@@ -18,7 +18,7 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
     PreparedStatement preparada;
     @Override
     public void addLineaPedido(LineasPedidos lp) {
-        consulta = "insert into lineaspedidos(idpedido,numerolinea,idproducto,cantidad) values(?,?,?,?)";
+        consulta = "insert into lineaspedidos(idpedido,numerolinea,idproducto,cantidad) values(?,?,?,?)";    
         try {
             preparada = ConnectionFactory.getConnection().prepareStatement(consulta);
             preparada.setInt(1, lp.getIdPedido());

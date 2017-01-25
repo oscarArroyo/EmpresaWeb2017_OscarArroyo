@@ -65,7 +65,7 @@
 
                         </div>
                             <div class="carrito text-center">
-                            <i class="fa fa-cart-plus fa-3x carro" aria-hidden="true"></i>
+                                <i class="fa fa-cart-plus fa-2x carro" aria-hidden="true"><c:out value="${pedido.lineasPedidos.size()}" default=""/></i>
                             </div>
                     </c:otherwise>
                 </c:choose>

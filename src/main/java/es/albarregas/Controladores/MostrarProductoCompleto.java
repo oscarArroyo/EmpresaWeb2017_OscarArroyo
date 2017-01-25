@@ -46,6 +46,7 @@ public class MostrarProductoCompleto extends HttpServlet {
         ArrayList<String> imagenes = idao.getImagenes(where);
         ArrayList<CaractProds> cp = cdao.getCaractProds(where);
         Productos pro = pdao.getOne(where);
+        pro.setIdProducto(Integer.parseInt(request.getParameter("producto")));
         request.setAttribute("pro", pro);
         request.setAttribute("imagenes", imagenes);
         request.setAttribute("cp", cp);

@@ -13,5 +13,6 @@ import es.albarregas.beans.Pedidos;
  */
 public interface IPedidosDAO {
     public void addPedido(Pedidos pedido);
+    public Pedidos getOne(String where);
     public void closeConnection();
 }
