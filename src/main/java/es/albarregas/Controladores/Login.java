@@ -6,11 +6,16 @@
 package es.albarregas.Controladores;
 
 import es.albarregas.beans.Clientes;
+import es.albarregas.beans.LineasPedidos;
+import es.albarregas.beans.Pedidos;
 import es.albarregas.beans.Usuarios;
 import es.albarregas.dao.IClientesDAO;
+import es.albarregas.dao.ILineasPedidosDAO;
+import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.dao.IUsuariosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,57 +44,69 @@ public class Login extends HttpServlet {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
         IUsuariosDAO udao = daof.getUsuariosDAO();
         IClientesDAO cdao = daof.getClientesDAO();
+        IPedidosDAO pdao = daof.getPedidosDAO();
+        ILineasPedidosDAO lpdao = daof.getLineasPedidosDAO();
+        String url;
         Usuarios usu;
         Clientes cli;
         HttpSession sesion;
-        if (request.getParameter("registro")!= null) {
-            String where="Where Email='"+request.getParameter("usuario")+"'";
+        if (request.getParameter("registro") != null) {
+            String where = "Where Email='" + request.getParameter("usuario") + "'";
             usu = udao.getOne(where);
-            if(usu==null){
-            Usuarios usu3 =new Usuarios();
-            sesion = request.getSession(true);
-            usu3.setEmail(request.getParameter("usuario"));
-            usu3.setClave(request.getParameter("pass"));
-            
-            udao.addUsuario(usu3);
-            Usuarios usu2=udao.getOne(where);
-            int idUsuario = usu2.getIdUsuario();
-            cdao.inicializarClientes(idUsuario);
-            String where2="Where IdCliente="+idUsuario;
-            cli=cdao.getOne(where2);
-            usu3.setIdUsuario(idUsuario);
-            sesion.setAttribute("sesion", usu3);
-            cli.setIdCliente(idUsuario);
-            sesion.setAttribute("cliente", cli);
-            }else{
+            if (usu == null) {
+                Usuarios usu3 = new Usuarios();
+                sesion = request.getSession(true);
+                usu3.setEmail(request.getParameter("usuario"));
+                usu3.setClave(request.getParameter("pass"));
+
+                udao.addUsuario(usu3);
+                Usuarios usu2 = udao.getOne(where);
+                int idUsuario = usu2.getIdUsuario();
+                cdao.inicializarClientes(idUsuario);
+                String where2 = "Where IdCliente=" + idUsuario;
+                cli = cdao.getOne(where2);
+                usu3.setIdUsuario(idUsuario);
+                sesion.setAttribute("sesion", usu3);
+                cli.setIdCliente(idUsuario);
+                sesion.setAttribute("cliente", cli);
+                url = "JSP/panelUsuario.jsp";
+            } else {
                 request.setAttribute("error3", "Este email ya esta registrado");
+                url = "JSP/registro.jsp";
             }
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            
-        } else if(request.getParameter("lg")!= null){
-            String where = "Where Email='"+request.getParameter("emLog")+"'";
+            request.getRequestDispatcher(url).forward(request, response);
+
+        } else if (request.getParameter("lg") != null) {
+            String where = "Where Email='" + request.getParameter("emLog") + "'";
             usu = udao.getOne(where);
-            if(usu==null){
+            if (usu == null) {
                 request.setAttribute("error", "Email incorrecto");
-            }else if(usu.getClave().equals(request.getParameter("passLog"))){
+            } else if (usu.getClave().equals(request.getParameter("passLog"))) {
                 sesion = request.getSession(true);
                 int idCliente = usu.getIdUsuario();
-                String where2="Where IdCliente="+idCliente;
-                cli=cdao.getOne(where2);
+                String where2 = "Where IdCliente=" + idCliente;
+                cli = cdao.getOne(where2);
                 sesion.setAttribute("sesion", usu);
                 cli.setIdCliente(idCliente);
                 sesion.setAttribute("cliente", cli);
-            }else{
+                Pedidos pedido = pdao.getOne(where2);
+                if(pedido!=null){
+                where2 = "Where IdPedido=" + pedido.getIdPedido();
+                ArrayList<LineasPedidos> listalp = lpdao.getLineasPedidos(where2);
+                pedido.setLineasPedidos(listalp);
+                sesion.setAttribute("pedido", pedido);
+                }
+            } else {
                 request.setAttribute("error2", "Clave incorrecta");
             }
             request.getRequestDispatcher("index.jsp").forward(request, response);
-            
-        }else if (request.getParameter("cs").equals("s")){
-            sesion=request.getSession();
+
+        } else if (request.getParameter("cs").equals("s")) {
+            sesion = request.getSession();
             sesion.invalidate();
             response.sendRedirect("index.jsp");
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

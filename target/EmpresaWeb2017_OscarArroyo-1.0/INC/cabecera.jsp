@@ -44,7 +44,7 @@
                                         <div class="loginmodal-container">
                                             <h1>Conectate a tu cuenta</h1><br/>
                                             <form method="post" action="${contexto}/Login">
-                                <input type="email" name="emLog" maxlength=60 style="width: 100%;height: 4rem" placeholder="Email del Usuario">
+                                            <input type="email" name="emLog" maxlength=60 style="width: 100%;height: 4rem" placeholder="Email del Usuario">
                                             <input type="password" name="passLog" placeholder="Contraseña">
                                             <input type="submit" class="login loginmodal-submit" name="lg" value="Enviar">
                                         </form>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="reg btn btn-default"><a href="${contexto}/JSP/registro.jsp">Registro</a></button>
+                       <a href="${contexto}/JSP/registro.jsp"> <button type="button" class="reg btn btn-default">Registro</button></a>
                     </c:when>
                     <c:otherwise>
                         <div class="usu-log">
@@ -65,7 +65,8 @@
 
                         </div>
                             <div class="carrito text-center">
-                                <i class="fa fa-cart-plus fa-2x carro" aria-hidden="true"><c:out value="${pedido.lineasPedidos.size()}" default=""/></i>
+                                
+                                <a href="${contexto}/MostrarCarrito">  <i class="fa fa-cart-plus fa-2x carro" aria-hidden="true"><c:out value="${pedido.lineasPedidos.size()}" default=""/></i></a>
                             </div>
                     </c:otherwise>
                 </c:choose>

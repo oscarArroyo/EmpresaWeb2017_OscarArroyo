@@ -19,57 +19,57 @@
         <title>Busqueda</title>
     </head>
     <script>
-            function pagination(num) {
-                if (num < 5) {
-                    num = 5;
-                }
-                var req_num_row = num;
-                var $tr = jQuery('tbody tr');
-                var total_num_row = $tr.length;
-                var num_pages = 0;
-                if (total_num_row % req_num_row == 0) {
-                    num_pages = total_num_row / req_num_row;
-                }
-                if (total_num_row % req_num_row >= 1) {
-                    num_pages = total_num_row / req_num_row;
-                    num_pages++;
-                    num_pages = Math.floor(num_pages++);
-                }
-
-                jQuery('#pagination').empty();
-                jQuery('#pagination').append('<ul class="pagination justify-content-center">');
-                for (var i = 1; i <= num_pages; i++) {
-                    jQuery('#pagination').append('<li class="page-item"><a class="page-link" href="#" onClick="toTop();">' + i + '</a></li>');
-                }
-                jQuery('#pagination').append('</ul>');
-
-                $tr.each(function (i) {
-                    jQuery(this).hide();
-                    if (i + 1 <= req_num_row) {
-                        $tr.eq(i).show();
-                    }
-
-                });
-                jQuery('#pagination a').click(function (e) {
-                    e.preventDefault();
-                    $tr.hide();
-                    var page = jQuery(this).text();
-                    var temp = page - 1;
-                    var start = temp * req_num_row;
-
-                    for (var i = 0; i < req_num_row; i++) {
-
-                        $tr.eq(start + i).show();
-
-                    }
-                });
+        function pagination(num) {
+            if (num < 5) {
+                num = 5;
             }
-            jQuery('document').ready(function () {
-                pagination(10);
+            var req_num_row = num;
+            var $tr = jQuery('tbody tr');
+            var total_num_row = $tr.length;
+            var num_pages = 0;
+            if (total_num_row % req_num_row == 0) {
+                num_pages = total_num_row / req_num_row;
+            }
+            if (total_num_row % req_num_row >= 1) {
+                num_pages = total_num_row / req_num_row;
+                num_pages++;
+                num_pages = Math.floor(num_pages++);
+            }
 
+            jQuery('#pagination').empty();
+            jQuery('#pagination').append('<ul class="pagination justify-content-center">');
+            for (var i = 1; i <= num_pages; i++) {
+                jQuery('#pagination').append('<li class="page-item"><a class="page-link" href="#" onClick="toTop();">' + i + '</a></li>');
+            }
+            jQuery('#pagination').append('</ul>');
+
+            $tr.each(function (i) {
+                jQuery(this).hide();
+                if (i + 1 <= req_num_row) {
+                    $tr.eq(i).show();
+                }
 
             });
-        </script>
+            jQuery('#pagination a').click(function (e) {
+                e.preventDefault();
+                $tr.hide();
+                var page = jQuery(this).text();
+                var temp = page - 1;
+                var start = temp * req_num_row;
+
+                for (var i = 0; i < req_num_row; i++) {
+
+                    $tr.eq(start + i).show();
+
+                }
+            });
+        }
+        jQuery('document').ready(function () {
+            pagination(10);
+
+
+        });
+    </script>
     <script>
         function toTop() {
             window.scrollTo(0, 0)
@@ -84,18 +84,18 @@
         <div class="row">
 
             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-               
+
                 <table class="table">
                     <thead>
-                        <th>Paginacion nº de registros </th>
-                        <th> <div>
-                                <form action="#" name="formulario" method="post">  
-                                    <input style="width: 16rem;" type="number" min="5" max="250" name="pag" required placeholder="Nº de registros">
-                                    <input type="button" onclick="pagination(document.formulario.pag.value);" value="Registros">
-                                </form>
-                            </div>
-                        </th>
-                        </thead>
+                    <th>Paginacion nº de registros </th>
+                    <th> <div>
+                            <form action="#" name="formulario" method="post">  
+                                <input style="width: 16rem;" type="number" min="5" max="250" name="pag" required placeholder="Nº de registros">
+                                <input type="button" onclick="pagination(document.formulario.pag.value);" value="Registros">
+                            </form>
+                        </div>
+                    </th>
+                    </thead>
                     <thead>
                         <tr>
                             <th>Imagen</th>
@@ -110,11 +110,11 @@
                             <c:out value=""></c:out>
                                 <tr>
                                     <td><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"/></a></td>
-                                    <td class="txt"><c:out value="${productos.denominacion}"/></td>
+                                    <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>
                                     <td class="txt"><a href="${contexto}/JSP/categorias.jsp?c=${productos.categoria}"><c:out value="${productos.categoria}"/></a></td>
                                     <td class="txt"><a href="${contexto}/JSP/marcas.jsp?p=${productos.marca}"><c:out value="${productos.marca}"/></a></td>
                                     <td class="txt"><c:out value="${productos.precioUnitario}"/></td>
-                                </tr>
+                            </tr>
                         </c:forEach>     
                     </tbody>
                 </table>
@@ -125,53 +125,53 @@
 
         </div>
     </div>
- 
+
     <jsp:include page="../INC/pie.jsp"/> 
     <script>
-             function sortTable(f, n) {
-                var rows = $('.table tbody  tr').get();
+        function sortTable(f, n) {
+            var rows = $('.table tbody  tr').get();
 
-                rows.sort(function (a, b) {
+            rows.sort(function (a, b) {
 
-                    var A = getVal(a);
-                    var B = getVal(b);
+                var A = getVal(a);
+                var B = getVal(b);
 
-                    if (A < B) {
-                        return -1 * f;
-                    }
-                    if (A > B) {
-                        return 1 * f;
-                    }
-                    return 0;
-                });
-
-                function getVal(elm) {
-                    var v = $(elm).children('td').eq(n).text().toUpperCase();
-                    if ($.isNumeric(v)) {
-                        v = parseFloat(v, 10);
-                    }
-                    return v;
+                if (A < B) {
+                    return -1 * f;
                 }
+                if (A > B) {
+                    return 1 * f;
+                }
+                return 0;
+            });
 
-                $.each(rows, function (index, row) {
-                    $('.table').children('tbody').append(row);
-                });
+            function getVal(elm) {
+                var v = $(elm).children('td').eq(n).text().toUpperCase();
+                if ($.isNumeric(v)) {
+                    v = parseFloat(v, 10);
+                }
+                return v;
             }
-            var denom = 1;
-            var pre = 1;
-            $(".denominacion").click(function () {
-                denom *= -1;
-                var n = $(this).prevAll().length;
-                sortTable(denom, n);
-                pagination(10);
-            });
-            $(".precio").click(function () {
-                pre *= -1;
-                var n = $(this).prevAll().length;
-                sortTable(pre, n);
-                pagination(10);
-            });
 
-        </script>
+            $.each(rows, function (index, row) {
+                $('.table').children('tbody').append(row);
+            });
+        }
+        var denom = 1;
+        var pre = 1;
+        $(".denominacion").click(function () {
+            denom *= -1;
+            var n = $(this).prevAll().length;
+            sortTable(denom, n);
+            pagination(10);
+        });
+        $(".precio").click(function () {
+            pre *= -1;
+            var n = $(this).prevAll().length;
+            sortTable(pre, n);
+            pagination(10);
+        });
+
+    </script>
 </body>
 </html> 

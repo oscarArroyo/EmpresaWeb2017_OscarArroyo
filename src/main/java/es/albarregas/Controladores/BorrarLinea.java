@@ -5,23 +5,28 @@
  */
 package es.albarregas.Controladores;
 
-import es.albarregas.beans.Productos;
+import es.albarregas.beans.Clientes;
+import es.albarregas.beans.LineasPedidos;
+import es.albarregas.beans.Pedidos;
+import es.albarregas.dao.ILineasPedidosDAO;
+import es.albarregas.dao.IPedidosDAO;
+import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Oscar
  */
-@WebServlet(name = "Buscador", urlPatterns = {"/Buscador"})
-public class Buscador extends HttpServlet {
+@WebServlet(name = "BorrarLinea", urlPatterns = {"/BorrarLinea"})
+public class BorrarLinea extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,22 +39,27 @@ public class Buscador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("text/html;charset=UTF-8");
-       String busqueda = request.getParameter("buscador").toLowerCase();
-       ServletContext contexto = getServletContext();
-       ArrayList<Productos> productos = (ArrayList)contexto.getAttribute("prods");
-       ArrayList<Productos> prodsBuscados=new ArrayList();
-       for(int i=0;i<productos.size();i++){
-           if(productos.get(i).getDenominacion().toLowerCase().contains(busqueda)
-                   || productos.get(i).getCategoria().toLowerCase().contains(busqueda)
-                   || productos.get(i).getMarca().toLowerCase().contains(busqueda)){
-               prodsBuscados.add(productos.get(i));
-           }
-           }
-           request.setAttribute("busqueda", prodsBuscados);
-           request.getRequestDispatcher("JSP/buscador.jsp").forward(request, response);  
-       }
-    
+        DAOFactory daof = DAOFactory.getDAOFactory(1);
+        ILineasPedidosDAO lpdao = daof.getLineasPedidosDAO();
+        IPedidosDAO pdao = daof.getPedidosDAO();
+        HttpSession sesion = request.getSession();
+        Clientes cliente = (Clientes)sesion.getAttribute("cliente");
+        String where="where idCliente="+cliente.getIdCliente();
+        Pedidos pedido = pdao.getOne(where);
+        String where2= "where numerolinea="+request.getParameter("nl")+ " and idPedido="+pedido.getIdPedido() ;
+        lpdao.deleteLineaPedido(where2);
+        Pedidos pedidos = (Pedidos)sesion.getAttribute("pedido");
+        String where3="where idPedido="+pedidos.getIdPedido();
+        ArrayList<LineasPedidos> listalp = lpdao.getLineasPedidos(where3);
+        pedidos.setLineasPedidos(listalp);
+        sesion.setAttribute("pedido", pedidos);
+        if(listalp.isEmpty()){
+            pdao.deletePedido(where3);
+            sesion.removeAttribute("pedido");
+        }
+        response.getWriter().write(String.valueOf(listalp.size()));
+           
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

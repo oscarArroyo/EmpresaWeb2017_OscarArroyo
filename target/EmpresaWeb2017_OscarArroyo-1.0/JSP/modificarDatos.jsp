@@ -40,19 +40,19 @@
                                         <tbody>
                                             <tr>
                                                 <td>Nombre: </td>
-                                                <td><input type="text" name="nombre"></td>
+                                                <td><input type="text" name="nombre" value="${cliente.nombre}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required=""></td>
                                             </tr>
                                             <tr>
                                                 <td>Apellidos: </td>
-                                                <td><input type="text" name="apellidos" value="${cliente.apellidos}"></td>
+                                                <td><input type="text" name="apellidos" value="${cliente.apellidos}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required=""></td>
                                             </tr>
                                             <tr>
                                                 <td>Nif: </td>
-                                                <td><input type="text" name="nif" value="${cliente.nif}"></td>
+                                                <td><input type="text" name="nif" value="${cliente.nif}" pattern="^\d{8}[A-Z]$" required></td>
                                             </tr>
                                             <tr>
                                                 <td>Fecha de nacimiento: </td>
-                                                <td><input type="date" name="fnacimiento" value="${cliente.fechaNacimiento}"></td>
+                                                <td><input type="date" name="fnacimiento" value="${cliente.fechaNacimiento}" required></td>
                                             </tr>
                                             <tr>
                                                 <td><input class="btn btn-success btn-pressure" type="submit" name="aceptar" value="Aceptar"</td>

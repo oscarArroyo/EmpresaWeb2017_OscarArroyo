@@ -25,7 +25,7 @@ public class ProductosDAO implements IProductosDAO {
     public ArrayList<Productos> getProductos() {
         ArrayList<Productos> lista = new ArrayList();
         consulta = "select IdProducto,Productos.Denominacion,Descripcion,PrecioUnitario,Marcas.Denominacion,Nombre,"
-                + "(select Imagen from Imagenes where Imagenes.IdProducto=Productos.IdProducto limit 1) as Imagen,Oferta from Productos"
+                + "(select Imagen from Imagenes where Imagenes.IdProducto=Productos.IdProducto limit 1) as Imagen,Oferta,Stock from Productos"
                 + " inner join Marcas using(IdMarca) inner join Categorias using(IdCategoria);";
 
         try {
@@ -41,6 +41,7 @@ public class ProductosDAO implements IProductosDAO {
                     producto.setCategoria(resultado.getString("Nombre"));
                     producto.setImagen(resultado.getString("Imagen"));
                     producto.setOferta(resultado.getString("Oferta"));
+                    producto.setStock(resultado.getInt("Stock"));
                     lista.add(producto);
                 }
             }

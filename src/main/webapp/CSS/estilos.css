@@ -41,9 +41,10 @@ a:link{
     float:left;
     margin-bottom: 2rem;
 }
-.reg{
+a .reg{
     margin-top: 2rem;
     margin-left:1rem;
+    color: #337ab7;
 }
 .loginmodal-container {
     padding: 30px;
@@ -624,6 +625,9 @@ label{
 }
 .carro{
     color:#d9edf7;
+}
+.carrito :hover{
+    color: black;
 }
 .caracteristicas .pvp {
     width: auto;

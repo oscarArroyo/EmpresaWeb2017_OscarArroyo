@@ -7,7 +7,10 @@ package es.albarregas.dao;
 
 import es.albarregas.beans.LineasPedidos;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -32,10 +35,51 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
             this.closeConnection();
         }
     }
+    @Override
+    public ArrayList<LineasPedidos> getLineasPedidos(String where) {
+        ArrayList<LineasPedidos> lista = new ArrayList();
+        consulta = "select IdPedido,NumeroLinea,IdProducto,Cantidad from lineaspedidos " + where;
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            try (ResultSet resultado = sentencia.executeQuery(consulta)) {
+                while (resultado.next()) {
+                    LineasPedidos lp = new LineasPedidos();
+                    lp.setIdPedido(resultado.getInt("IdPedido"));
+                    lp.setNumeroLinea(resultado.getInt("NumeroLinea"));
+                    lp.setIdProducto(resultado.getInt("IdProducto"));
+                    lp.setCantidad(resultado.getInt("Cantidad"));
+                    lista.add(lp);
+                }
+            }
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
+        return lista;
+    }
+     @Override
+    public void deleteLineaPedido(String where) {
+       consulta = "delete from lineaspedidos "+where;    
+        try {
+             Statement sentencia = ConnectionFactory.getConnection().createStatement();
+             sentencia.executeUpdate(consulta);
+             
+   
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
+    }
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
+
+   
+
+    
     
 }

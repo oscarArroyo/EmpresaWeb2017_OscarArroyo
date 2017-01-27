@@ -5,6 +5,7 @@
  */
 package es.albarregas.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author Oscar
  */
-public class Pedidos {
+public class Pedidos implements Serializable{
     private int idPedido;
     private Date fecha;
     private String estado;
