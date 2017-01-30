@@ -34,6 +34,9 @@
                             <div class="row">
                                 <div class=" col-xs-12 col-sm-10 col-sm-offset-1 "> 
                                     <table class="table ">
+                                        <c:choose>
+                                        <c:when test="${pedido!=null}"> 
+                                        
                                         <thead>
                                             <tr>
                                                 <th>Denominacion</th>
@@ -50,9 +53,12 @@
                                                 <td>${producto.denominacion}</td>
                                                 <td>${producto.precioUnitario}</td>
                                                 <td>
-                                                    <select>
+                                                    <select class="unidades">
                                                         <c:forEach begin="1" step="1" var="unidades" end="${producto.stock}">
                                                             <option value="${unidades}"><c:out value="${unidades}"/></option>
+                                                            <c:if test="${unidades==lp.cantidad}">
+                                                            <option value="${lp.cantidad}" selected >${lp.cantidad}</option>
+                                                            </c:if>
                                                         </c:forEach>
                                                     </select>
                                                 </td>
@@ -61,11 +67,20 @@
                                                     </c:if>
                                                 </c:forEach>
                                             </c:forEach>
+                                                    
                                             <tr>
-                                                <td colspan="2"><button class="btn-success">Aceptar pedido</button></td>
-                                                <td colspan="2"><button class="btn-danger">Cancelar pedido</button></td>
+                                                <td colspan="2"><a href="${contexto}/FinalizarPedido?boton=ace&pedido=${pedido.idPedido}"><button class="btn-success ace">Aceptar pedido</button></a></td>
+                                                <td colspan="2"><a href="${contexto}/FinalizarPedido?boton=can&pedido=${pedido.idPedido}"><button class="btn-danger can">Cancelar pedido</button></a></td>
                                             </tr>
+                                                    
                                         </tbody>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr>
+                                                <td colspan="4">No hay productos a&ntilde;adidos</td>
+                                            </tr>
+                                        </c:otherwise>
+                                        </c:choose>
                                     </table>
                                 </div>
                             </div>
@@ -78,7 +93,6 @@
         <jsp:include page="../INC/pie.jsp"/>
         <script>
                 $('.borrar').click(function(event) {
-                        alert("Entro en el evento");
 			$(this).parent().parent().remove();
                         var nl = $(this).val();
 			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
@@ -90,6 +104,18 @@
                             }else{
                                 $('.carro').html(responseText);
                             }
+			});
+		});
+       </script>
+       <script>
+                $('.unidades').change(function(event) {
+                        var unidades = $(this).val();
+                        var numeroLinea = $(this).parent().parent().find('td .borrar').val();
+			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+			$.post('${contexto}/AumentarUnidades', {
+				unidades : unidades,
+                                numeroLinea : numeroLinea
+			}, function(responseText) {
 			});
 		});
        </script>

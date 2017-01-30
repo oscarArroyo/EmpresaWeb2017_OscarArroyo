@@ -5,11 +5,13 @@
  */
 package es.albarregas.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Oscar
  */
-public class Direcciones {
+public class Direcciones implements Serializable{
     private int idDireccion;
     private int idCliente;
     private String nombreDireccion;

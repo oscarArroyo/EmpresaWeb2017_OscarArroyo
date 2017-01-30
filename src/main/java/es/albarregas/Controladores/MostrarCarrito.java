@@ -38,14 +38,12 @@ public class MostrarCarrito extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         DAOFactory daof = DAOFactory.getDAOFactory(1);
-         IPedidosDAO pdao=daof.getPedidosDAO();
-         
          HttpSession sesion = request.getSession(true);
-         Clientes cli = (Clientes)sesion.getAttribute("cliente");
          Pedidos pedido=(Pedidos)sesion.getAttribute("pedido");
+         if(pedido!=null){
          ArrayList <LineasPedidos> listalp = pedido.getLineasPedidos();
          sesion.setAttribute("listalp",listalp);
+         }
          request.getRequestDispatcher("JSP/carritoUsuario.jsp").forward(request, response);
     }
 

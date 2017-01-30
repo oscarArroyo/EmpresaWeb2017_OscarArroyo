@@ -56,6 +56,7 @@ public class BorrarLinea extends HttpServlet {
         if(listalp.isEmpty()){
             pdao.deletePedido(where3);
             sesion.removeAttribute("pedido");
+            sesion.removeAttribute("listalp");
         }
         response.getWriter().write(String.valueOf(listalp.size()));
            

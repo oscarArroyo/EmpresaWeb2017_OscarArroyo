@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
-                                    <input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Direcciones"/>
+                                    <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <table class="table table-user-information">

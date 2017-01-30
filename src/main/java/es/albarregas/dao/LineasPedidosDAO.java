@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 /**
  *
  * @author Oscar
@@ -73,10 +74,29 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
             this.closeConnection();
         }
     }
+      @Override
+    public void updateLineaPedido(LineasPedidos lp,String where) {
+         try {
+
+            consulta = "update lineaspedidos set cantidad=? "+where;
+            preparada = ConnectionFactory.getConnection().prepareStatement(consulta);
+            preparada.setInt(1, lp.getCantidad());
+            System.out.println(where);
+            System.out.println(consulta);
+            preparada.executeUpdate();
+            
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
+    }
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
+
+  
 
    
 

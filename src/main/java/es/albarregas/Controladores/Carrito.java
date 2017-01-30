@@ -65,7 +65,8 @@ public class Carrito extends HttpServlet {
             lp.setNumeroLinea(1);
         }else{
             listalp=pedido3.getLineasPedidos();
-            lp.setNumeroLinea(listalp.size()+1);
+            lp.setNumeroLinea(pedido3.getLineasPedidos().get(pedido3.getLineasPedidos().size()-1).getNumeroLinea()+1);
+
         }
         lp.setIdProducto(Integer.parseInt(request.getParameter("idProducto")));
         listalp.add(lp);

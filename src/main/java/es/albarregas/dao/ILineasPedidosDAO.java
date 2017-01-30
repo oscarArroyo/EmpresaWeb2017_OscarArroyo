@@ -16,6 +16,7 @@ public interface ILineasPedidosDAO {
     public void addLineaPedido(LineasPedidos lp);
     public ArrayList<LineasPedidos> getLineasPedidos(String where);
     public void deleteLineaPedido(String where);
+    public void updateLineaPedido(LineasPedidos lp,String where);
     public void closeConnection();
     
 }
