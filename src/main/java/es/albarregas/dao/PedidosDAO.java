@@ -26,7 +26,7 @@ public class PedidosDAO implements IPedidosDAO{
          consulta = "insert into pedidos(fecha,estado,idCliente) values(now(),?,?)";
         try {
             preparada = ConnectionFactory.getConnection().prepareStatement(consulta);
-            preparada.setString(1, pedido.getEstado());
+            preparada.setString(1,String.valueOf(pedido.getEstado()));
             preparada.setInt(2, pedido.getIdCliente());
             preparada.executeUpdate();
         } catch (SQLException ex) {
@@ -73,8 +73,23 @@ public class PedidosDAO implements IPedidosDAO{
         ConnectionFactory.closeConnection();
     }
 
-   
-
+    @Override
+    public void updatePedido(Pedidos pedido) {
+        System.out.println("Entro updatePedidos");
+         try {
+            String sql = "update Pedidos set estado=? where idCliente=? and estado='n'";
+            preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setString(1,String.valueOf(pedido.getEstado()));
+            preparada.setInt(2, pedido.getIdCliente());
+            System.out.println("pedido.getIdCliente: "+pedido.getIdCliente());
+            System.out.println("pedido.getEstado: "+pedido.getEstado());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
     
+    }
     
 }

@@ -5,6 +5,7 @@
  */
 package es.albarregas.Controladores;
 
+import com.google.gson.Gson;
 import es.albarregas.beans.Clientes;
 import es.albarregas.beans.Direcciones;
 import es.albarregas.beans.Provincias;
@@ -15,6 +16,7 @@ import es.albarregas.dao.IPueblosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +50,8 @@ public class CrearDirecciones extends HttpServlet {
         if(request.getParameter("cancelar")!=null){
             response.sendRedirect("JSP/panelUsuario.jsp");
         }else if(request.getParameter("aceptar")!=null){
-            String where=" where codigoPostal="+request.getParameter("cod");
+            System.out.println("Entro aceptar");
+            String where=" where codigoPostal='"+request.getParameter("cod")+"'";
             Pueblos pb=pbdao.getOne(where);
             Direcciones dir = new Direcciones();
             HttpSession sesion = request.getSession();
@@ -60,14 +63,23 @@ public class CrearDirecciones extends HttpServlet {
             dir.setIdPueblo(pb.getIdPueblo());
             dir.setTelefono(request.getParameter("tlf"));
             ddao.addDireccion(dir);
+            String where2 = " Where IdCliente=" + cli.getIdCliente();
+            ArrayList<Direcciones> listadir = ddao.getDirecciones(where2);
+            System.out.println("LLEGO CREAR");
+            sesion.setAttribute("direcciones",listadir);
             response.sendRedirect("JSP/panelUsuario.jsp");
+            
         }else if(request.getParameter("btncodigo")!=null){
-            System.out.println("entro btn");
-            String where=" where codigoPostal="+request.getParameter("cod");
+            String where=" where codigoPostal='"+request.getParameter("cod")+"'";
             Pueblos pb=pbdao.getOne(where);
             String where2="where idProvincia="+pb.getIdProvincia();
             Provincias pro =prodao.getOne(where2);
-            response.getWriter().write(pb.getNombre() +"/"+pro.getNombre());
+            ArrayList<String> lista= new ArrayList();
+            lista.add(pro.getNombre());
+            lista.add(pb.getNombre());
+            String json = new Gson().toJson(lista);
+            response.setContentType("application/json");
+            response.getWriter().write(json);
         }
     }
 

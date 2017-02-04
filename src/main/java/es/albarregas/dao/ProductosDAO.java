@@ -6,6 +6,7 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Productos;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,13 +57,14 @@ public class ProductosDAO implements IProductosDAO {
 
     @Override
     public Productos getOne(String where) {
-        
-        consulta ="select Productos.Denominacion,Productos.descripcion,PrecioUnitario,Stock,Marcas.denominacion,Categorias.nombre from productos inner join marcas using (idMarca) inner join categorias using (idCategoria)" +where;
+        System.out.println("Entro getOne");
+        consulta ="select idProducto,Productos.Denominacion,Productos.descripcion,PrecioUnitario,Stock,Marcas.denominacion,Categorias.nombre from productos inner join marcas using (idMarca) inner join categorias using (idCategoria)" +where;
         try {
             sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
                 while (resultado.next()) {
                     producto = new Productos();
+                    producto.setIdProducto(resultado.getInt("idProducto"));
                     producto.setDenominacion(resultado.getString("Productos.Denominacion"));
                     producto.setDescripcion(resultado.getString("Productos.Descripcion"));
                     producto.setPrecioUnitario(resultado.getDouble("PrecioUnitario"));
@@ -81,6 +83,25 @@ public class ProductosDAO implements IProductosDAO {
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void updateProductos(Productos pro) {
+        System.out.println("Entro updateProductos");
+        try {
+            String sql = "update Productos set stock=? where idProducto=?";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setInt(1, pro.getStock());
+            preparada.setInt(2, pro.getIdProducto());
+            System.out.println("producto.getStock: "+producto.getStock());
+            System.out.println("producto.getIdProducto: "+producto.getIdProducto());
+            preparada.executeUpdate();
+            
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
     }
 
 }

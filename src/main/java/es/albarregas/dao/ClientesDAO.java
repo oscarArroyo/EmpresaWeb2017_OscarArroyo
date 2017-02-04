@@ -64,12 +64,6 @@ public class ClientesDAO implements IClientesDAO{
     @Override
     public void updateClientes(Clientes cliente) {
          try {
-             System.out.println("Entro al dao");
-             System.out.println(cliente.getNombre());
-             System.out.println(cliente.getApellidos());
-             System.out.println(cliente.getNif());
-             System.out.println(cliente.getFechaNacimiento());
-             System.out.println(cliente.getIdCliente());
             String sql = "update Clientes set nombre=?,apellidos=?,nif=?,fechaNacimiento=? where idCliente=?";
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.setString(1, cliente.getNombre());

@@ -6,6 +6,7 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Direcciones;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,6 +14,8 @@ import es.albarregas.beans.Direcciones;
  */
 public interface IDireccionesDAO {
     public void addDireccion(Direcciones dir);
+    public ArrayList<Direcciones> getDirecciones(String where);
+    public Direcciones getOne(String where);
     public void closeConnection();
     
 }

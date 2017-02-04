@@ -27,7 +27,7 @@
 
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><c:out value="${sesion.email}"/></h3>
+                            <h3 class="panel-title">Panel del usuario: <c:out value="${sesion.email}"/></h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -57,6 +57,19 @@
                                             <tr>
                                                 <td>Fecha de alta: </td>
                                                 <td><c:out value="${cliente.fechaAlta}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Direcciones: </td>
+                                               
+                                                <td>
+                                                    <ol>
+                                                         <c:forEach items="${direcciones}" var="dir">
+                                                             <li style="border: 1px solid white;">Nombre: <c:out value="${dir.nombreDireccion}"/><br/>Direccion: <c:out value="${dir.direccion}"/><br/>Codigo Postal: <c:out value="${dir.codigoPostal}"/></li>
+                                                        </c:forEach>
+                                                  </ol>
+                                                </td>
+                                                
+                                                
                                             </tr>
                                         </tbody>
                                     </table>

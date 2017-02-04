@@ -31,20 +31,21 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/>
-                                    <a href="${contexto}/JSP/Direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
+                                    <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <form method="post" action="${contexto}/PanelCliente">
                                     <table class="table table-user-information">
                                         
                                         <tbody>
+                                            
                                             <tr>
                                                 <td>Nombre: </td>
-                                                <td><input type="text" name="nombre" value="${cliente.nombre}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required=""></td>
+                                                <td><input type="text" name="nombre" value="${cliente.nombre}" pattern="^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$" required=""></td>
                                             </tr>
                                             <tr>
                                                 <td>Apellidos: </td>
-                                                <td><input type="text" name="apellidos" value="${cliente.apellidos}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required=""></td>
+                                                <td><input type="text" name="apellidos" value="${cliente.apellidos}" pattern="^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$" required=""></td>
                                             </tr>
                                             <tr>
                                                 <td>Nif: </td>

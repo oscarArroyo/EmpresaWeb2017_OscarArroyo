@@ -82,7 +82,7 @@
 
             <div class="row">
 
-                <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                <div class="col-sm-offset-1 col-sm-10 col-xs-12 cuerpo">
 
                     <table class="table">
                         <thead>

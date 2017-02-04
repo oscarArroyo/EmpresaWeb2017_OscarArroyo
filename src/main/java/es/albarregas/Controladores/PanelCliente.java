@@ -6,12 +6,15 @@
 package es.albarregas.Controladores;
 
 import es.albarregas.beans.Clientes;
+import es.albarregas.beans.Direcciones;
 import es.albarregas.beans.Usuarios;
 import es.albarregas.dao.IClientesDAO;
+import es.albarregas.dao.IDireccionesDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +42,7 @@ public class PanelCliente extends HttpServlet {
             throws ServletException, IOException {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
         IClientesDAO cdao = daof.getClientesDAO();
+        
         if (request.getParameter("cancelar") != null) {
             response.sendRedirect("JSP/panelUsuario.jsp");
         } else if (request.getParameter("aceptar") != null) {
@@ -59,6 +63,7 @@ public class PanelCliente extends HttpServlet {
             sesion.setAttribute("cliente", cliente);
             }
             response.sendRedirect("JSP/panelUsuario.jsp");
+            
         }
     }
 

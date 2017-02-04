@@ -29,6 +29,7 @@ C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\ja
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\ClientesDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IUsuariosDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\Controladores\FinalizarPedido.java
+C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\Controladores\CrearDirecciones.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\beans\CaractProds.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IImagenesDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\beans\Categorias.java
@@ -42,7 +43,6 @@ C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\ja
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\beans\Usuarios.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\CaractProdsDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IClientesDAO.java
-C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\Controladores\Direcciones.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IProductosDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\Controladores\MostrarCarrito.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\ImagenesDAO.java

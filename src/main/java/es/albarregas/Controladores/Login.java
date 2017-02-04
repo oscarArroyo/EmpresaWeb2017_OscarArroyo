@@ -6,10 +6,12 @@
 package es.albarregas.Controladores;
 
 import es.albarregas.beans.Clientes;
+import es.albarregas.beans.Direcciones;
 import es.albarregas.beans.LineasPedidos;
 import es.albarregas.beans.Pedidos;
 import es.albarregas.beans.Usuarios;
 import es.albarregas.dao.IClientesDAO;
+import es.albarregas.dao.IDireccionesDAO;
 import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.dao.IUsuariosDAO;
@@ -46,6 +48,7 @@ public class Login extends HttpServlet {
         IClientesDAO cdao = daof.getClientesDAO();
         IPedidosDAO pdao = daof.getPedidosDAO();
         ILineasPedidosDAO lpdao = daof.getLineasPedidosDAO();
+        IDireccionesDAO ddao=daof.getDireccionesDAO();
         String url;
         Usuarios usu;
         Clientes cli;
@@ -96,6 +99,10 @@ public class Login extends HttpServlet {
                 pedido.setLineasPedidos(listalp);
                 sesion.setAttribute("pedido", pedido);
                 }
+                System.out.println("LLEGO LOGIN");
+            String where3=" Where IdCliente=" + idCliente;
+            ArrayList<Direcciones> listadir = ddao.getDirecciones(where3);
+            sesion.setAttribute("direcciones",listadir);
             } else {
                 request.setAttribute("error2", "Clave incorrecta");
             }

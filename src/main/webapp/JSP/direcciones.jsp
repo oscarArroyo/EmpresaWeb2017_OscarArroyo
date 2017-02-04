@@ -41,33 +41,33 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Nombre de la direccion: </td>
-                                                    <td><input type="text" name="nbdir"></td>
+                                                    <td><input type="text" name="nbdir" required=""></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>Direccion: </td>
-                                                    <td><input type="text" name="dir"></td>
+                                                    <td><input type="text" name="dir" required=""></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>Tel&eacute;fono: </td>
-                                                    <td><input type="text" name="tlf"></td>
+                                                    <td><input type="text" name="tlf" required=""></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>C&oacute;digo Postal: </br>
-                                                    </td>
-                                                    <td><input type="text" name="cod"><input type="button" name="btncodigo" class="btn btn-info btn-pressure btncodigo" value="Buscar Localidad"></td>
+
+                                                    <td><input type="text" id="cod" name="cod" required="" title="Complete el campo y presione el boton"><input type="button" value="Buscar Localidad" class="btn btn-info btn-pressure btncodigo"></button></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>Provincia: </td>
-                                                    <td><input type="text" name="pro" class="pro" readonly ></td>
+                                                    <td><div class="pro"></div></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>Localidad: </td>
-                                                    <td><input type="text" name="loc" class="loc" readonly></td>
+                                                    <td><div class="loc"></div></td>
 
                                                 </tr>
                                                 <tr>
@@ -88,16 +88,25 @@
             </div>
         </div>
         <script>
-          $('.btncodigo').click(function(event) {
-                        alert("entro");
-                        var cod = $(this).parent().val();
-			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('${contexto}/CrearDirecciones', {
-				cod : cod
-			}, function(responseText) {
-                            $('.pro').html(responseText);
-			});
-		});  
+            $('.btncodigo').click(function (event) {
+                var cod = $(this).parent().find('#cod').val();
+                var btncodigo = "";
+                // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+                $.post('${contexto}/CrearDirecciones', {
+                    cod: cod,
+                    btncodigo: btncodigo
+                }, function (responseText) {
+                    $.each(responseText, function (index, value) {
+                        if (index == 0) {
+                            $('.pro').append(value);
+
+                        } else {
+                            $('.loc').append(value);
+                        }
+                    });
+                });
+            });
+
         </script>
         <jsp:include page="../INC/pie.jsp"/>
     </body>

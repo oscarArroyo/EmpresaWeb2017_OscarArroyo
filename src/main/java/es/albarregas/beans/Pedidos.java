@@ -16,7 +16,7 @@ import java.util.Date;
 public class Pedidos implements Serializable{
     private int idPedido;
     private Date fecha;
-    private String estado;
+    private char estado;
     private int idCliente;
     private double baseImponible;
     private double descuento;
@@ -49,11 +49,11 @@ public class Pedidos implements Serializable{
         this.fecha = fecha;
     }
 
-    public String getEstado() {
+    public char getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(char estado) {
         this.estado = estado;
     }
 

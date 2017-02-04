@@ -6,8 +6,12 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Direcciones;
+import es.albarregas.beans.Productos;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +20,8 @@ import java.sql.SQLException;
 public class DireccionesDAO implements IDireccionesDAO{
     String consulta;
     PreparedStatement preparada;
+    Statement sentencia;
+    Direcciones dir;
     @Override
     public void addDireccion(Direcciones dir) {
        consulta = "insert into direcciones(idCliente,NombreDireccion,direccion,codigoPostal,idPueblo,telefono) values(?,?,?,?,?,?)";
@@ -35,10 +41,63 @@ public class DireccionesDAO implements IDireccionesDAO{
             this.closeConnection();
         }
     }
+    @Override
+    public ArrayList<Direcciones> getDirecciones(String where) {
+        ArrayList<Direcciones> listadir = new ArrayList();
+        consulta="select idDireccion,nombreDireccion,direccion,codigoPostal,telefono from direcciones "+where;
+         try {
+            sentencia = ConnectionFactory.getConnection().createStatement();
+            try (ResultSet resultado = sentencia.executeQuery(consulta)) {
+                while (resultado.next()) {
+                    dir = new Direcciones();
+                    dir.setIdDireccion(resultado.getInt("idDireccion"));
+                    dir.setNombreDireccion(resultado.getString("nombreDireccion"));
+                    dir.setDireccion(resultado.getString("direccion"));
+                    dir.setCodigoPostal(resultado.getString("codigoPostal"));
+                    dir.setTelefono(resultado.getString("telefono"));
+                    listadir.add(dir);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
+        return listadir;
+    }
+     @Override
+    public Direcciones getOne(String where) {
+        consulta="select idDireccion,nombreDireccion,direccion,codigoPostal,telefono from direcciones "+where;
+        System.out.println(consulta);
+        dir=new Direcciones();
+        try {
+            sentencia = ConnectionFactory.getConnection().createStatement();
+            try (ResultSet resultado = sentencia.executeQuery(consulta)) {
+                 while (resultado.next()) {
+                    dir.setIdDireccion(resultado.getInt("idDireccion"));
+                    dir.setNombreDireccion(resultado.getString("nombreDireccion"));
+                    dir.setDireccion(resultado.getString("direccion"));
+                    dir.setCodigoPostal(resultado.getString("codigoPostal"));
+                    dir.setTelefono(resultado.getString("telefono"));
+                 }
+                  
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
+            return dir;
+        
+    }
 
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
+
+   
+
+    
     
 }

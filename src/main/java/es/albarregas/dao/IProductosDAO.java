@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public interface IProductosDAO {
     public ArrayList<Productos> getProductos();
     public Productos getOne(String where);
+    public void updateProductos (Productos pro);
     public void closeConnection();
     
 }

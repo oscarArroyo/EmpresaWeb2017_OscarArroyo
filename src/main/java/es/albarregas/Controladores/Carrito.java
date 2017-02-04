@@ -47,7 +47,7 @@ public class Carrito extends HttpServlet {
         HttpSession sesion = request.getSession();
         
         if(sesion.getAttribute("pedido")==null){
-        pedido.setEstado("n");
+        pedido.setEstado('n');
         Clientes cliente=(Clientes)sesion.getAttribute("cliente");
         pedido.setIdCliente(cliente.getIdCliente());
         String where="where idCliente="+cliente.getIdCliente()+" and estado='"+pedido.getEstado()+"'";
