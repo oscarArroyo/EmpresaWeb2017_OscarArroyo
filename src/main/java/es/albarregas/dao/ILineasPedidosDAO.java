@@ -17,6 +17,7 @@ public interface ILineasPedidosDAO {
     public ArrayList<LineasPedidos> getLineasPedidos(String where);
     public void deleteLineaPedido(String where);
     public void updateLineaPedido(LineasPedidos lp,String where);
+    public void updateLineaPedidoPrecio(LineasPedidos lp,String where);
     public void closeConnection();
     
 }

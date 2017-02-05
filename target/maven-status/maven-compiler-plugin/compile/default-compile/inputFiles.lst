@@ -5,6 +5,7 @@ C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\ja
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\DireccionesDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\Controladores\Buscador.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\UsuariosDAO.java
+C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\beans\General.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\Controladores\Login.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\ProvinciasDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\beans\Productos.java
@@ -26,6 +27,7 @@ C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\ja
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IMarcasDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\filters\UTF8Filter.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\LineasPedidosDAO.java
+C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\GeneralDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\ClientesDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IUsuariosDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\Controladores\FinalizarPedido.java
@@ -39,6 +41,8 @@ C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\ja
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\beans\Pedidos.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IDireccionesDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IProvinciasDAO.java
+C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\Controladores\Administracion.java
+C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\IGeneralDAO.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\daofactory\MySQLDAOFactory.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\beans\Usuarios.java
 C:\Users\Oscar\Documents\NetBeansProjects\EmpresaWeb2017_OscarArroyo\src\main\java\es\albarregas\dao\CaractProdsDAO.java

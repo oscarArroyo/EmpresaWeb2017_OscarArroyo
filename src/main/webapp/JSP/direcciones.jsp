@@ -10,6 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="Óscar Arroyo León" />
+        <meta name="generator" content="NetBeans IDE 8.1" />
+        <meta name="copyright" content="Desarrollo web entorno servidor" />
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="html" />
+        <meta name="description" content="Direcciones" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${contexto}/BOOTSTRAP/css/bootstrap.min.css" rel="stylesheet">
         <link href="${contexto}/CSS/estilos.css" rel ="stylesheet">
@@ -41,23 +47,23 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Nombre de la direccion: </td>
-                                                    <td><input type="text" name="nbdir" required=""></td>
+                                                    <td><input type="text" name="nbdir" required="" pattern="^[A-Za-z\s]+"></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>Direccion: </td>
-                                                    <td><input type="text" name="dir" required=""></td>
+                                                    <td><input type="text" name="dir" required="" pattern="^[A-Za-z\s]+"></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>Tel&eacute;fono: </td>
-                                                    <td><input type="text" name="tlf" required=""></td>
+                                                    <td><input type="text" name="tlf" required="" pattern="^[9|6|7][0-9]{8}$"></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>C&oacute;digo Postal: </br>
 
-                                                    <td><input type="text" id="cod" name="cod" required="" title="Complete el campo y presione el boton"><input type="button" value="Buscar Localidad" class="btn btn-info btn-pressure btncodigo"></button></td>
+                                                    <td><input type="text" id="cod" name="cod" required="" title="Complete el campo y presione el boton" pattern="^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$"><input type="button" value="Buscar Localidad" class="btn btn-info btn-pressure btncodigo"></button></td>
 
                                                 </tr>
                                                 <tr>

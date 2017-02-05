@@ -4,10 +4,12 @@ import es.albarregas.dao.CaractProdsDAO;
 import es.albarregas.dao.CategoriasDAO;
 import es.albarregas.dao.ClientesDAO;
 import es.albarregas.dao.DireccionesDAO;
+import es.albarregas.dao.GeneralDAO;
 import es.albarregas.dao.ICaractProdsDAO;
 import es.albarregas.dao.ICategoriasDAO;
 import es.albarregas.dao.IClientesDAO;
 import es.albarregas.dao.IDireccionesDAO;
+import es.albarregas.dao.IGeneralDAO;
 import es.albarregas.dao.IImagenesDAO;
 import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IMarcasDAO;
@@ -66,7 +68,9 @@ public class MySQLDAOFactory extends DAOFactory{
   public IProvinciasDAO getProvinciasDAO(){
       return new ProvinciasDAO();
   }
-  
+   public IGeneralDAO getGeneralDAO(){
+      return new GeneralDAO();
+  }
 }
 
     

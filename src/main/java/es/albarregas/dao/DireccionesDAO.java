@@ -23,6 +23,7 @@ public class DireccionesDAO implements IDireccionesDAO{
     Statement sentencia;
     Direcciones dir;
     @Override
+    //Método para añadir una dirreccion al usuario
     public void addDireccion(Direcciones dir) {
        consulta = "insert into direcciones(idCliente,NombreDireccion,direccion,codigoPostal,idPueblo,telefono) values(?,?,?,?,?,?)";
         try {
@@ -42,6 +43,7 @@ public class DireccionesDAO implements IDireccionesDAO{
         }
     }
     @Override
+    //Método para obtener todas las direcciones de un usuario
     public ArrayList<Direcciones> getDirecciones(String where) {
         ArrayList<Direcciones> listadir = new ArrayList();
         consulta="select idDireccion,nombreDireccion,direccion,codigoPostal,telefono from direcciones "+where;
@@ -66,6 +68,7 @@ public class DireccionesDAO implements IDireccionesDAO{
         return listadir;
     }
      @Override
+     //Método para obtener una direccion de un usuario
     public Direcciones getOne(String where) {
         consulta="select idDireccion,nombreDireccion,direccion,codigoPostal,telefono from direcciones "+where;
         System.out.println(consulta);

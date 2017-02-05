@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ImagenesDAO implements IImagenesDAO{
 
     @Override
+    //Método para obtener todas las url de las imágenes de un producto
     public ArrayList<String> getImagenes(String where) {
          ArrayList<String> img = new ArrayList();
          String consulta = "select Imagen from imagenes "+where;

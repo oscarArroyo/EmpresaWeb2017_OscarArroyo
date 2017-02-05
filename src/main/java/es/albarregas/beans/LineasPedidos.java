@@ -16,7 +16,7 @@ public class LineasPedidos implements Serializable{
     private int numeroLinea;
     private int idProducto;
     private int cantidad;
-    private int precioUnitario;
+    private float precioUnitario;
 
     public int getIdPedido() {
         return idPedido;
@@ -50,11 +50,11 @@ public class LineasPedidos implements Serializable{
         this.cantidad = cantidad;
     }
 
-    public int getPrecioUnitario() {
+    public float getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(int precioUnitario) {
+    public void setPrecioUnitario(float precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
     

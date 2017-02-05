@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class CategoriasDAO implements ICategoriasDAO {
 
     @Override
+    //Metodo para obtener todas las categorías y su id
     public ArrayList<Categorias> getCategorias() {
         ArrayList<Categorias> cat = new ArrayList();
         String consulta = "select IdCategoria,Nombre from Categorias";

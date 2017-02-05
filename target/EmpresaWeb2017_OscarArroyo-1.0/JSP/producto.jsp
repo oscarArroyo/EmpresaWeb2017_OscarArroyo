@@ -5,11 +5,18 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="Óscar Arroyo León" />
+        <meta name="generator" content="NetBeans IDE 8.1" />
+        <meta name="copyright" content="Desarrollo web entorno servidor" />
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="html" />
+        <meta name="description" content="Página del producto" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${contexto}/BOOTSTRAP/css/bootstrap.min.css" rel="stylesheet">
         <link href="${contexto}/CSS/estilos.css" rel ="stylesheet">
@@ -56,9 +63,10 @@
                     </div>
                     <div class=" col-sm-7 col-xs-6 caracteristicas">
                         <c:if test="${sesion!=null}">
-                            <a class="add-cart"><button class="compra btn btn-success text-center"  value="">A&ntilde;adir al carro</button></a>
+                            <div class="sinStock text-center" style="color:red;"></div>
+                            <a class="add-cart"><button class="compra btn btn-success text-center" value="">A&ntilde;adir al carro</button></a>
                         </c:if>
-                        <h5 class="pvp text-center">Precio: <c:out value="${pro.precioUnitario}"/>&euro; </h5>
+                        <h5 class="pvp text-center">Precio: <fmt:formatNumber type="currency" maxFractionDigits="2" value="${pro.precioUnitario}" /> </h5>
                         <h5>Denominaci&oacute;n: <c:out value="${pro.denominacion}"/> </h5>
                         <h5>Descripci&oacute;n: <c:out value="${pro.descripcion}"/></h5>
                         <h5>Stock: <c:out value="${pro.stock}"/></h5>
@@ -83,12 +91,19 @@
             <script>
                 $('.add-cart').click(function(event) {
 			var idProducto = ${pro.idProducto};
+                        var stock = ${pro.stock};
+                        alert(stock);
 			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
 			$.post('${contexto}/Carrito', {
-				idProducto : idProducto
+				idProducto : idProducto,
+                                stock:stock
 			}, function(responseText) {
+                            if(stock!=0){
 				$('.carro').html(responseText);
-			});
+                            }else{
+                                $('.sinStock').html(responseText);
+                            }
+			}); 
 		});
             </script>
         </div>

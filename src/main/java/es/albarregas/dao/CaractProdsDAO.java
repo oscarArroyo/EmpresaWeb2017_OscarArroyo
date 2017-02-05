@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class CaractProdsDAO implements ICaractProdsDAO{
 
     @Override
+    //Método para obtener todas las caracteristicas con su nombre y su valor
     public ArrayList<CaractProds> getCaractProds(String where) {
         ArrayList<CaractProds> cp = new ArrayList();
         CaractProds cps;

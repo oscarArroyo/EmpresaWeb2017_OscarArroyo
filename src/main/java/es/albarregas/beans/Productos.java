@@ -23,9 +23,29 @@ public class Productos implements Serializable {
     private String Imagen;
     private ArrayList<String> Imagenes;
     private String Oferta;
+    private String fueraCatalogo;
     private int Stock;
+    private int StockMinimo;
     private ArrayList<CaractProds> CaractProds;
 
+    public int getStockMinimo() {
+        return StockMinimo;
+    }
+
+    public void setStockMinimo(int StockMinimo) {
+        this.StockMinimo = StockMinimo;
+    }
+
+    
+    public String getFueraCatalogo() {
+        return fueraCatalogo;
+    }
+
+    public void setFueraCatalogo(String fueraCatalogo) {
+        this.fueraCatalogo = fueraCatalogo;
+    }
+
+    
     public String getImagen() {
         return Imagen;
     }

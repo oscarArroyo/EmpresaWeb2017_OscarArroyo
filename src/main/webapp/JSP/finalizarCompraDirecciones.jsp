@@ -10,6 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="Óscar Arroyo León" />
+        <meta name="generator" content="NetBeans IDE 8.1" />
+        <meta name="copyright" content="Desarrollo web entorno servidor" />
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="html" />
+        <meta name="description" content="Finalizar compra direcciones"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${contexto}/BOOTSTRAP/css/bootstrap.min.css" rel="stylesheet">
         <link href="${contexto}/CSS/estilos.css" rel ="stylesheet">

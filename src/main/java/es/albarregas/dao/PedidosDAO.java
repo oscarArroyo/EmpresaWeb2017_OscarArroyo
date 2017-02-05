@@ -22,6 +22,7 @@ public class PedidosDAO implements IPedidosDAO{
     PreparedStatement preparada;
     Statement sentencia;
     @Override
+    //Método para añadir un pedido
     public void addPedido(Pedidos pedido) {
          consulta = "insert into pedidos(fecha,estado,idCliente) values(now(),?,?)";
         try {
@@ -36,6 +37,7 @@ public class PedidosDAO implements IPedidosDAO{
         }
     }
     @Override
+    //Método para obtener el idPedido a partir del idCliente
     public Pedidos getOne(String where) {
         consulta ="select IdPedido from pedidos " +where;
         try {
@@ -54,6 +56,7 @@ public class PedidosDAO implements IPedidosDAO{
         return pedido;
     }
      @Override
+    //Método para borrar un pedido cuando no haya lineas de ese pedido
     public void deletePedido(String where) {
         consulta = "delete from pedidos "+where;    
         try {
@@ -74,15 +77,16 @@ public class PedidosDAO implements IPedidosDAO{
     }
 
     @Override
+    //Método para actualizar el pedido de estado nuevo a estado remitido al cual se le añade los gastos de envio,iva e idDireccion
     public void updatePedido(Pedidos pedido) {
-        System.out.println("Entro updatePedidos");
          try {
-            String sql = "update Pedidos set estado=? where idCliente=? and estado='n'";
+            String sql = "update Pedidos set estado=?,gastosEnvio=?,iva=?,idDireccion=? where idCliente=? and estado='n'";
             preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.setString(1,String.valueOf(pedido.getEstado()));
-            preparada.setInt(2, pedido.getIdCliente());
-            System.out.println("pedido.getIdCliente: "+pedido.getIdCliente());
-            System.out.println("pedido.getEstado: "+pedido.getEstado());
+            preparada.setFloat(2, (float) pedido.getGastosEnvio());
+            preparada.setFloat(3, (float) pedido.getIva());
+            preparada.setInt(4, pedido.getIdDireccion());
+            preparada.setInt(5, pedido.getIdCliente());
             preparada.executeUpdate();
         } catch (SQLException ex) {
           ex.printStackTrace();

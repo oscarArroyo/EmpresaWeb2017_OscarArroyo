@@ -5,11 +5,18 @@
 --%>
 <%@taglib prefix="c" 
           uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="Óscar Arroyo León" />
+        <meta name="generator" content="NetBeans IDE 8.1" />
+        <meta name="copyright" content="Desarrollo web entorno servidor" />
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="html" />
+        <meta name="description" content="Buscador" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${contexto}/BOOTSTRAP/css/bootstrap.min.css" rel="stylesheet">
         <link href="${contexto}/CSS/estilos.css" rel ="stylesheet">
@@ -113,7 +120,7 @@
                                     <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>
                                     <td class="txt"><a href="${contexto}/JSP/categorias.jsp?c=${productos.categoria}"><c:out value="${productos.categoria}"/></a></td>
                                     <td class="txt"><a href="${contexto}/JSP/marcas.jsp?p=${productos.marca}"><c:out value="${productos.marca}"/></a></td>
-                                    <td class="txt"><c:out value="${productos.precioUnitario}"/></td>
+                                    <td class="txt"><fmt:formatNumber type="currency" maxFractionDigits="2" value="${productos.precioUnitario}" /></td>
                             </tr>
                         </c:forEach>     
                     </tbody>

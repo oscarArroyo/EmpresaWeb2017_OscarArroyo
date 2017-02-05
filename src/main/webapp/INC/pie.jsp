@@ -15,6 +15,35 @@
   
 
         <p class="footer-company-name">ExtremComponentes &copy; 2017</p>
+        <a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Trabaja con nosotros</a>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Rellene los datos</h4>
+      </div>
+      <div class="modal-body">
+          <form action="#" method="post">
+              <label>Email: </label>
+              <input type="email" required=""> <br/>
+              <label>Nombre: </label>
+              <input type="text" required=""> <br/>
+              <label>Apellidos: </label>
+              <input type="text" required=""> <br/>
+              <label>Edad: </label>
+              <input type="text" required=""><br/>
+              <label> Env&iacute;e su curriculum</label>
+              <input type="file" required="">
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <input type="submit" class="btn btn-primary" data-dismiss="modal">
+      </div>
+    </div>
+  </div>
+</div>
     </div>
 
     <div class="footer-center">

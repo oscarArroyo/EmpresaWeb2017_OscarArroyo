@@ -10,6 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="Óscar Arroyo León" />
+        <meta name="generator" content="NetBeans IDE 8.1" />
+        <meta name="copyright" content="Desarrollo web entorno servidor" />
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="html" />
+        <meta name="description" content="Panel del usuario" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${contexto}/BOOTSTRAP/css/bootstrap.min.css" rel="stylesheet">
         <link href="${contexto}/CSS/estilos.css" rel ="stylesheet">
@@ -34,6 +40,9 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
+                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                    </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <table class="table table-user-information">

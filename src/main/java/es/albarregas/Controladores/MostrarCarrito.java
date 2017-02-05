@@ -5,13 +5,9 @@
  */
 package es.albarregas.Controladores;
 
-import es.albarregas.beans.Clientes;
 import es.albarregas.beans.LineasPedidos;
 import es.albarregas.beans.Pedidos;
-import es.albarregas.dao.IPedidosDAO;
-import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +34,7 @@ public class MostrarCarrito extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         //Método que añade a las sesion las líneas de pedido de un pedido para su visualizacion en la jsp de carritoUsuario 
          HttpSession sesion = request.getSession(true);
          Pedidos pedido=(Pedidos)sesion.getAttribute("pedido");
          if(pedido!=null){

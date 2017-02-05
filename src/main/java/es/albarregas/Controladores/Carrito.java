@@ -45,8 +45,11 @@ public class Carrito extends HttpServlet {
         LineasPedidos lp = new LineasPedidos();
         ArrayList<LineasPedidos> listalp = new ArrayList();
         HttpSession sesion = request.getSession();
-        
-        if(sesion.getAttribute("pedido")==null){
+        System.out.println("stock"+request.getParameter("stock"));
+        if(Integer.parseInt(request.getParameter("stock"))==0){
+            response.getWriter().write("No disponemos de unidades para este producto, lo sentimos");
+        }else{
+            if(sesion.getAttribute("pedido")==null){
         pedido.setEstado('n');
         Clientes cliente=(Clientes)sesion.getAttribute("cliente");
         pedido.setIdCliente(cliente.getIdCliente());
@@ -74,6 +77,7 @@ public class Carrito extends HttpServlet {
         pedido.setLineasPedidos(listalp);
         sesion.setAttribute("pedido", pedido3);
         response.getWriter().write(String.valueOf(listalp.size()));  
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

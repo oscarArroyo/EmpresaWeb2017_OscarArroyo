@@ -65,7 +65,6 @@ public class CrearDirecciones extends HttpServlet {
             ddao.addDireccion(dir);
             String where2 = " Where IdCliente=" + cli.getIdCliente();
             ArrayList<Direcciones> listadir = ddao.getDirecciones(where2);
-            System.out.println("LLEGO CREAR");
             sesion.setAttribute("direcciones",listadir);
             response.sendRedirect("JSP/panelUsuario.jsp");
             

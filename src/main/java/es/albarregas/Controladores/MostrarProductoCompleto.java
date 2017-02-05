@@ -12,7 +12,6 @@ import es.albarregas.dao.IImagenesDAO;
 import es.albarregas.dao.IProductosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +37,7 @@ public class MostrarProductoCompleto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Método para sacar todos los datos referentes a un producto(caracteristicas,imagenes,stock,etc) y enviarlos a la página jsp de producto.jsp
         DAOFactory daof = DAOFactory.getDAOFactory(1);
         IProductosDAO pdao= daof.getProductosDAO();
         IImagenesDAO idao= daof.getImagenesDAO();

@@ -6,6 +6,7 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Usuarios;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +16,8 @@ public interface IUsuariosDAO {
     public void addUsuario(Usuarios usu);
     public void closeConnection();
     public Usuarios getOne(String where);
-
+    public void updateFechaAcceso(Usuarios usu);
+    public ArrayList<Usuarios> getUsuarios();
+    public void updateUsuariosBloqueados(String eleccion,int idUsuario);
     
 }

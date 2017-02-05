@@ -17,5 +17,7 @@ public interface IProductosDAO {
     public Productos getOne(String where);
     public void updateProductos (Productos pro);
     public void closeConnection();
-    
+    public void updateProductosOfertas(String eleccion,int idProducto);
+    public void updateProductosBloqueados(String eleccion,int idProducto);
+    public void updateProductosPrecio(float precioNuevo,int idProducto);
 }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class MarcasDAO implements IMarcasDAO{
 
     @Override
+    //Método para obtener el nombre y el id de todas las marcas
     public ArrayList<Marcas> getMarcas() {
         ArrayList<Marcas> mar = new ArrayList();
         String consulta = "select IdMarca,Denominacion from Marcas";

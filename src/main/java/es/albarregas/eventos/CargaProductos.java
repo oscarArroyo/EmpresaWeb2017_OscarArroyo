@@ -26,6 +26,7 @@ import javax.servlet.annotation.WebListener;
 public class CargaProductos implements ServletContextListener {
 
     @Override
+    ////Método que carga todos lo productos, las categorías y las marcas cuando se inicia la aplicacion
     public void contextInitialized(ServletContextEvent sce) {
            DAOFactory daof = DAOFactory.getDAOFactory(1);
            IProductosDAO pdao=daof.getProductosDAO();

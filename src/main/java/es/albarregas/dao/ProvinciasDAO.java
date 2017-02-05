@@ -19,6 +19,7 @@ public class ProvinciasDAO implements IProvinciasDAO {
     Statement sentencia;
     Provincias pro;
     @Override
+    //Método para obtener el id de una provincia y su nombre según el idProvincia
     public Provincias getOne(String where) {
          consulta = "select idProvincia,nombre from provincias " + where;
         try {

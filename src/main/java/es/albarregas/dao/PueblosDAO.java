@@ -20,6 +20,7 @@ public class PueblosDAO implements IPueblosDAO {
     Statement sentencia;
     Pueblos pue;
     @Override
+    //Método para obtener el idPueblo,nombre,idProvincia de un pueblo según el codigo postal
     public Pueblos getOne(String where) {
         consulta = "select idPueblo,nombre,idProvincia from pueblos " + where;
         try {

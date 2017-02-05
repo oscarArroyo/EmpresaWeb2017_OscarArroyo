@@ -21,6 +21,7 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
     String consulta;
     PreparedStatement preparada;
     @Override
+    //Método para añadir una linea de pedido
     public void addLineaPedido(LineasPedidos lp) {
         consulta = "insert into lineaspedidos(idpedido,numerolinea,idproducto,cantidad) values(?,?,?,?)";    
         try {
@@ -37,6 +38,7 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
         }
     }
     @Override
+    //Método para obtener todas las lineas de pedido de un pedido
     public ArrayList<LineasPedidos> getLineasPedidos(String where) {
         ArrayList<LineasPedidos> lista = new ArrayList();
         consulta = "select IdPedido,NumeroLinea,IdProducto,Cantidad from lineaspedidos " + where;
@@ -61,6 +63,7 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
         return lista;
     }
      @Override
+     //Método para borrar una linea de pedido segun el numeroLinea
     public void deleteLineaPedido(String where) {
        consulta = "delete from lineaspedidos "+where;    
         try {
@@ -75,14 +78,13 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
         }
     }
       @Override
+      //Método para actualizar la cantidad de una lineaPedido
     public void updateLineaPedido(LineasPedidos lp,String where) {
          try {
 
             consulta = "update lineaspedidos set cantidad=? "+where;
             preparada = ConnectionFactory.getConnection().prepareStatement(consulta);
             preparada.setInt(1, lp.getCantidad());
-            System.out.println(where);
-            System.out.println(consulta);
             preparada.executeUpdate();
             
         } catch (SQLException ex) {
@@ -94,6 +96,23 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    //Método para poner el precio unitario en su lineaPedido correspondiente
+    public void updateLineaPedidoPrecio(LineasPedidos lp, String where) {
+        try {
+
+            consulta = "update lineaspedidos set precioUnitario=? "+where;
+            preparada = ConnectionFactory.getConnection().prepareStatement(consulta);
+            preparada.setFloat(1, lp.getPrecioUnitario());
+            preparada.executeUpdate();
+            
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
     }
 
   

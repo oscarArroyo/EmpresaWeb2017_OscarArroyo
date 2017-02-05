@@ -20,8 +20,11 @@ public class ClientesDAO implements IClientesDAO{
     Clientes cliente;
     String consulta;
     Statement sentencia;
+    PreparedStatement preparada;
 
     @Override
+    //Método para inizialidar un cliente cuando se registra un Usuario. Se introducen todos los datos a vacio excepto el idCliente que es el mismo
+    //que el id del usuario que se acaba de registrar
     public void inicializarClientes(int idUsuario) {
         consulta = "insert into Clientes(IdCliente,Nombre,Apellidos,NIF,FechaAlta) values("+idUsuario+",'','','',now())";
         try {
@@ -40,6 +43,7 @@ public class ClientesDAO implements IClientesDAO{
     }
 
     @Override
+    //Método para obtener un cliente
     public Clientes getOne(String where) {
         try {
             consulta = "Select nombre,apellidos,nif,FechaNacimiento,FechaAlta from Clientes " + where;
@@ -62,10 +66,11 @@ public class ClientesDAO implements IClientesDAO{
     }
 
     @Override
+    //Metodo par actualizar los datos de un cliente
     public void updateClientes(Clientes cliente) {
          try {
             String sql = "update Clientes set nombre=?,apellidos=?,nif=?,fechaNacimiento=? where idCliente=?";
-            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.setString(1, cliente.getNombre());
             preparada.setString(2, cliente.getApellidos());
             preparada.setString(3, cliente.getNif());
@@ -78,6 +83,8 @@ public class ClientesDAO implements IClientesDAO{
             this.closeConnection();
         }
     }
+
+ 
     
     }
     
