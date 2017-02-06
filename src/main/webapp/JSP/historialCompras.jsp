@@ -49,22 +49,32 @@
                                         <div class="historial">
                                             <p> <strong>Pedido:</strong> <c:out value="${pedido.idPedido}"/></p>
                                             <p> <strong>Fecha:</strong> <c:out value="${pedido.fecha}"/></p>
+                                            <c:choose>
+                                                <c:when test="${pedido.estado=='r'.charAt(0)}">
+                                                        <c:set var="estado" value="remitido"/>
+                                                        </c:when>
+                                               <c:when test="${pedido.estado=='p'.charAt(0)}">
+                                                        <c:set var="estado" value="pendiente"/>
+                                                        </c:when> 
+                                                </c:choose>
+                                            <p> <strong>Estado:</strong> <c:out value="${estado}"/></p>
+                                            
                                             <p> <strong>Total:</strong><fmt:formatNumber type="currency" maxFractionDigits="2" value="${pedido.baseImponible+pedido.gastosEnvio}" /><p>
                                             <p> <strong>Base imponible:</strong> <fmt:formatNumber type="currency" maxFractionDigits="2" value="${pedido.baseImponible}" /><p>
                                             <p> <strong>Gastos envío:</strong> <fmt:formatNumber type="currency" maxFractionDigits="2" value="${pedido.gastosEnvio}" /><p>
                                             <p> <strong>Iva:</strong> <fmt:formatNumber type="number" maxFractionDigits="0" value="${pedido.iva}" />&percnt;</p>  
                                             <c:forEach items="${historialLineas}" var="lineas">
                                                 <c:if test="${lineas.idPedido==pedido.idPedido}">
-                                                <c:forEach items="${prods}" var="pro">
-                                                    <c:if test="${pro.idProducto==lineas.idProducto}">
-                                                        <p><strong>Denominacion :</strong> <c:out value="${pro.denominacion}"/></p>
+                                                    <c:forEach items="${prods}" var="pro">
+                                                        <c:if test="${pro.idProducto==lineas.idProducto}">
+                                                            <p><strong>Denominacion :</strong> <c:out value="${pro.denominacion}"/></p>
                                                         </c:if>
                                                     </c:forEach>
-                                                        <p><strong>Unidades : </strong><c:out value="${lineas.cantidad}"/></p>
-                                                        <p><strong>Precio unitario :</strong> <fmt:formatNumber type="currency" maxFractionDigits="2" value="${lineas.precioUnitario}" /></p>
-                                                        </c:if>           
-                                                </c:forEach>
-                                                        <hr>
+                                                    <p><strong>Unidades : </strong><c:out value="${lineas.cantidad}"/></p>
+                                                    <p><strong>Precio unitario :</strong> <fmt:formatNumber type="currency" maxFractionDigits="2" value="${lineas.precioUnitario}" /></p>
+                                                </c:if>           
+                                            </c:forEach>
+                                            <hr>
                                         </div>
                                     </c:forEach>
                                 </div>

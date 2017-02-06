@@ -41,9 +41,9 @@
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/>
                                     <a href="${contexto}/HistorialCompras"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Historial de compras"/></a>
-                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
-                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
-                                    </c:if>
+                                        <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                        <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                        </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 direcciones"> 
                                     <table class="table table-user-information tabla-direcciones">
@@ -83,7 +83,6 @@
                                                 <tr>
                                                     <td><input class="btn btn-success btn-pressure" type="submit" name="aceptar" value="Aceptar"</td>
                                                     <td><input class="btn btn-danger btn-pressure" type="submit" name="cancelar" value="Cancelar"></td>
-
                                                 </tr>
                                             </tbody>
                                         </form>

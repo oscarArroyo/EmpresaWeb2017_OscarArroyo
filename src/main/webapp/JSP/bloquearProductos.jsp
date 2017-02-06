@@ -142,7 +142,6 @@
         </div>
         <script>
             $('.proBlo').click(function (event) {
-                alert("entro");
                 var bloPro = "";
                 if ($(this).prop('checked')) {
                     var chk = 'on';
@@ -150,8 +149,6 @@
                     var chk = 'off';
                 }
                 var idP = $(this).parent().find('.idP').val();
-                alert(chk + idP);
-                                                // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
                 $.post('${contexto}/Administracion', {
                     bloPro: bloPro,
                     chk: chk,

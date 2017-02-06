@@ -37,12 +37,13 @@ public class MostrarProductoCompleto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         //Método para sacar todos los datos referentes a un producto(caracteristicas,imagenes,stock,etc) y enviarlos a la página jsp de producto.jsp
         DAOFactory daof = DAOFactory.getDAOFactory(1);
-        IProductosDAO pdao= daof.getProductosDAO();
-        IImagenesDAO idao= daof.getImagenesDAO();
-        ICaractProdsDAO cdao= daof.getCaractProdsDAO();
-        String where="Where IdProducto="+request.getParameter("producto");
+        IProductosDAO pdao = daof.getProductosDAO();
+        IImagenesDAO idao = daof.getImagenesDAO();
+        ICaractProdsDAO cdao = daof.getCaractProdsDAO();
+        String where = "Where IdProducto=" + request.getParameter("producto");
         ArrayList<String> imagenes = idao.getImagenes(where);
         ArrayList<CaractProds> cp = cdao.getCaractProds(where);
         Productos pro = pdao.getOne(where);
@@ -51,7 +52,7 @@ public class MostrarProductoCompleto extends HttpServlet {
         request.setAttribute("imagenes", imagenes);
         request.setAttribute("cp", cp);
         request.getRequestDispatcher("JSP/producto.jsp").forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

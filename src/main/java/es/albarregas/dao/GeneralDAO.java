@@ -9,20 +9,22 @@ import es.albarregas.beans.General;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
  *
  * @author Oscar
  */
-public class GeneralDAO implements IGeneralDAO{
+public class GeneralDAO implements IGeneralDAO {
+
     String consulta;
     Statement sentencia;
-    General gen= new General();
+    General gen = new General();
+
     @Override
+
     //Método para obtener el iva y los gastos de envio
     public General getGeneral() {
-        consulta ="select * from general";
+        consulta = "select * from general";
         try {
             sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
@@ -42,7 +44,7 @@ public class GeneralDAO implements IGeneralDAO{
 
     @Override
     public void closeConnection() {
-         ConnectionFactory.closeConnection();
+        ConnectionFactory.closeConnection();
     }
-    
+
 }

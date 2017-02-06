@@ -98,9 +98,9 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
-                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
-                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
-                                    </c:if>
+                                        <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                        <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                        </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <form action="${contexto}/Administracion" method="post">
@@ -122,7 +122,7 @@
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                 <td><input type="checkbox" class="ofer" name="ofer" >
-                                                                <input type="hidden" class="idP" name="idP" value="${pro.idProducto}"></td>
+                                                                    <input type="hidden" class="idP" name="idP" value="${pro.idProducto}"></td>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                     </tr>
@@ -144,26 +144,24 @@
             </div>
         </div>
         <script>
-                $('.ofer').click(function(event) {
-                    alert("entro");
-			var oferta="";
-                        if($(this).prop('checked')){
-                        var chk = 'on';
-                    }else{
-                        var chk='off';
-                    }
-                        var idP = $(this).parent().find('.idP').val();
-                        alert(chk + idP);
-			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('${contexto}/Administracion', {
-                                oferta:oferta,
-                                chk:chk,
-				idP : idP
-			}, function(responseText) {
-                            
-			});
-		});
-       </script>
+            $('.ofer').click(function (event) {
+                var oferta = "";
+                if ($(this).prop('checked')) {
+                    var chk = 'on';
+                } else {
+                    var chk = 'off';
+                }
+                var idP = $(this).parent().find('.idP').val();
+                // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+                $.post('${contexto}/Administracion', {
+                    oferta: oferta,
+                    chk: chk,
+                    idP: idP
+                }, function (responseText) {
+
+                });
+            });
+        </script>
         <jsp:include page="../INC/pie.jsp"/>
     </body>
 </html>

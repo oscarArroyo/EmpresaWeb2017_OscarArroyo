@@ -15,13 +15,16 @@ import java.sql.Statement;
  * @author Oscar
  */
 public class ProvinciasDAO implements IProvinciasDAO {
+
     String consulta;
     Statement sentencia;
     Provincias pro;
+
     @Override
+
     //Método para obtener el id de una provincia y su nombre según el idProvincia
     public Provincias getOne(String where) {
-         consulta = "select idProvincia,nombre from provincias " + where;
+        consulta = "select idProvincia,nombre from provincias " + where;
         try {
             sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
@@ -38,8 +41,8 @@ public class ProvinciasDAO implements IProvinciasDAO {
         }
         return pro;
     }
-    
-      @Override
+
+    @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }

@@ -33,25 +33,25 @@ public class Buscador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       //Busca la palabra introducida en la caja de texto. La busca sobre denominacion del producto,marca,categoría.
-       //Si se encuentra se añade a un arrayList de productos para su visualizacion posteriormente
-       response.setContentType("text/html;charset=UTF-8");
-       String busqueda = request.getParameter("buscador").toLowerCase();
-       ServletContext contexto = getServletContext();
-       ArrayList<Productos> productos = (ArrayList)contexto.getAttribute("prods");
-       ArrayList<Productos> prodsBuscados=new ArrayList();
-       for(int i=0;i<productos.size();i++){
-           if(productos.get(i).getDenominacion().toLowerCase().contains(busqueda)
-                   || productos.get(i).getCategoria().toLowerCase().contains(busqueda)
-                   || productos.get(i).getMarca().toLowerCase().contains(busqueda)
-                   && productos.get(i).getFueraCatalogo().equals("n")){
-               prodsBuscados.add(productos.get(i));
-           }
-           }
-           request.setAttribute("busqueda", prodsBuscados);
-           request.getRequestDispatcher("JSP/buscador.jsp").forward(request, response);  
-       }
-    
+
+        //Busca la palabra introducida en la caja de texto. La busca sobre denominacion del producto,marca,categoría.
+        //Si se encuentra se añade a un arrayList de productos para su visualizacion posteriormente
+        response.setContentType("text/html;charset=UTF-8");
+        String busqueda = request.getParameter("buscador").toLowerCase();
+        ServletContext contexto = getServletContext();
+        ArrayList<Productos> productos = (ArrayList) contexto.getAttribute("prods");
+        ArrayList<Productos> prodsBuscados = new ArrayList();
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getDenominacion().toLowerCase().contains(busqueda)
+                    || productos.get(i).getCategoria().toLowerCase().contains(busqueda)
+                    || productos.get(i).getMarca().toLowerCase().contains(busqueda)
+                    && productos.get(i).getFueraCatalogo().equals("n")) {
+                prodsBuscados.add(productos.get(i));
+            }
+        }
+        request.setAttribute("busqueda", prodsBuscados);
+        request.getRequestDispatcher("JSP/buscador.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

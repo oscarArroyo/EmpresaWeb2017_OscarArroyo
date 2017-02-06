@@ -38,17 +38,18 @@ public class AumentarUnidades extends HttpServlet {
             throws ServletException, IOException {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
         ILineasPedidosDAO lpdao = daof.getLineasPedidosDAO();
-        LineasPedidos lp=new LineasPedidos();
+        LineasPedidos lp = new LineasPedidos();
         HttpSession sesion = request.getSession();
+
         //Aumenta las unidades sobre la linea de pedido que seleccione el usuario desde 1 hasta stock. Estos cambios se insertan en la base de datos
         // y también en la sesión. Se realiza mediante ajax
-        Pedidos pedido =(Pedidos) sesion.getAttribute("pedido");
-        String where = "where idPedido= "+pedido.getIdPedido()+ " and numeroLinea= "+request.getParameter("numeroLinea");
+        Pedidos pedido = (Pedidos) sesion.getAttribute("pedido");
+        String where = "where idPedido= " + pedido.getIdPedido() + " and numeroLinea= " + request.getParameter("numeroLinea");
         lp.setCantidad(Integer.parseInt(request.getParameter("unidades")));
         lpdao.updateLineaPedido(lp, where);
-        ArrayList<LineasPedidos>listalp= (ArrayList<LineasPedidos>) sesion.getAttribute("listalp");
-        for(int i = 0 ;i<listalp.size();i++){
-            if(listalp.get(i).getIdPedido()==pedido.getIdPedido() && listalp.get(i).getNumeroLinea()==Integer.parseInt(request.getParameter("numeroLinea"))){
+        ArrayList<LineasPedidos> listalp = (ArrayList<LineasPedidos>) sesion.getAttribute("listalp");
+        for (int i = 0; i < listalp.size(); i++) {
+            if (listalp.get(i).getIdPedido() == pedido.getIdPedido() && listalp.get(i).getNumeroLinea() == Integer.parseInt(request.getParameter("numeroLinea"))) {
                 listalp.get(i).setCantidad(Integer.parseInt(request.getParameter("unidades")));
             }
         }

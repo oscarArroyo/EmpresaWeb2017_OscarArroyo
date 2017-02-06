@@ -39,10 +39,10 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="fac-dir pull-right" style="margin-right: 2rem;">
-                                <img  src="${contexto}/IMG/logo2.png" alt="logo de la empresa">
-                                <p>AV/Via de la plata</p>
-                                <p>Mérida,Badajoz (06800)</p>
-                                <p>Teléfono: 682271686 </p>
+                                    <img  src="${contexto}/IMG/logo2.png" alt="logo de la empresa">
+                                    <p>AV/Via de la plata</p>
+                                    <p>Mérida,Badajoz (06800)</p>
+                                    <p>Teléfono: 682271686 </p>
                                 </div>
                                 <div class="fac-datos pull-left " style="margin-left: 2rem;">
                                     <p><strong>Nombre: <c:out value="${cli.nombre}"/></strong> </p>
@@ -56,23 +56,23 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">Unidades</th>
-                                        <th class="text-center">Denominacion</th>
-                                        <th class="text-center">Precio unitario</th>
-                                        <th class="text-center">Importe</tr>
+                                                <th class="text-center">Denominacion</th>
+                                                <th class="text-center">Precio unitario</th>
+                                                <th class="text-center">Importe</tr>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach items="${lilp}" var="linea">
-                                            <tr>
-                                                <td>${linea.cantidad}</td>
-                                                 <c:forEach items="${prods}" var="pr">
-                                                   <c:if test="${pr.idProducto==linea.idProducto}">
-                                                       <td>${pr.denominacion}</td>
+                                                <tr>
+                                                    <td>${linea.cantidad}</td>
+                                                    <c:forEach items="${prods}" var="pr">
+                                                        <c:if test="${pr.idProducto==linea.idProducto}">
+                                                            <td>${pr.denominacion}</td>
                                                         </c:if>
-                                                 </c:forEach>
-                                                <td><fmt:formatNumber type="currency" maxFractionDigits="2" value="${linea.precioUnitario}" /></td>
-                                                <td><fmt:formatNumber type="currency" maxFractionDigits="2" value="${linea.precioUnitario*linea.cantidad}" /></td>
-                                            </tr>
+                                                    </c:forEach>
+                                                    <td><fmt:formatNumber type="currency" maxFractionDigits="2" value="${linea.precioUnitario}" /></td>
+                                                    <td><fmt:formatNumber type="currency" maxFractionDigits="2" value="${linea.precioUnitario*linea.cantidad}" /></td>
+                                                </tr>
                                             </c:forEach>
                                             <tr>
                                                 <td></td>
@@ -112,13 +112,13 @@
                                             </tr>
                                         </tfoot>
                                     </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
-            </div>
-                <jsp:include page="../INC/pie.jsp"/>
-                </body>
-                </html>
+        </div>
+        <jsp:include page="../INC/pie.jsp"/>
+    </body>
+</html>

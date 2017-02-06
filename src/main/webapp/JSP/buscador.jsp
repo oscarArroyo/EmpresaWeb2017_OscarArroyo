@@ -90,12 +90,13 @@
 
         <div class="row">
 
-            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+            <div class="col-sm-offset-1 col-sm-10 col-xs-12 cuerpo">
 
                 <table class="table">
                     <thead>
                     <th>Paginacion nº de registros </th>
-                    <th> <div>
+                    <th> 
+                        <div>
                             <form action="#" name="formulario" method="post">  
                                 <input style="width: 16rem;" type="number" min="5" max="250" name="pag" required placeholder="Nº de registros">
                                 <input type="button" onclick="pagination(document.formulario.pag.value);" value="Registros">
@@ -114,12 +115,12 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${busqueda}" var="productos">
-                                <tr>
-                                    <td><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"/></a></td>
-                                    <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>
-                                    <td class="txt"><a href="${contexto}/JSP/categorias.jsp?c=${productos.categoria}"><c:out value="${productos.categoria}"/></a></td>
-                                    <td class="txt"><a href="${contexto}/JSP/marcas.jsp?p=${productos.marca}"><c:out value="${productos.marca}"/></a></td>
-                                    <td class="txt"><fmt:formatNumber type="currency" maxFractionDigits="2" value="${productos.precioUnitario}" /></td>
+                            <tr>
+                                <td><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"/></a></td>
+                                <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>
+                                <td class="txt"><a href="${contexto}/JSP/categorias.jsp?c=${productos.categoria}"><c:out value="${productos.categoria}"/></a></td>
+                                <td class="txt"><a href="${contexto}/JSP/marcas.jsp?p=${productos.marca}"><c:out value="${productos.marca}"/></a></td>
+                                <td class="txt"><fmt:formatNumber type="currency" maxFractionDigits="2" value="${productos.precioUnitario}" /></td>
                             </tr>
                         </c:forEach>     
                     </tbody>
@@ -128,12 +129,12 @@
 
                 </div>
             </div>
-
         </div>
     </div>
 
     <jsp:include page="../INC/pie.jsp"/> 
     <script>
+
         function sortTable(f, n) {
             var rows = $('.table tbody  tr').get();
 

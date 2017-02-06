@@ -34,14 +34,15 @@ public class MostrarCarrito extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         //Método que añade a las sesion las líneas de pedido de un pedido para su visualizacion en la jsp de carritoUsuario 
-         HttpSession sesion = request.getSession(true);
-         Pedidos pedido=(Pedidos)sesion.getAttribute("pedido");
-         if(pedido!=null){
-         ArrayList <LineasPedidos> listalp = pedido.getLineasPedidos();
-         sesion.setAttribute("listalp",listalp);
-         }
-         request.getRequestDispatcher("JSP/carritoUsuario.jsp").forward(request, response);
+
+        //Método que añade a las sesion las líneas de pedido de un pedido para su visualizacion en la jsp de carritoUsuario 
+        HttpSession sesion = request.getSession(true);
+        Pedidos pedido = (Pedidos) sesion.getAttribute("pedido");
+        if (pedido != null) {
+            ArrayList<LineasPedidos> listalp = pedido.getLineasPedidos();
+            sesion.setAttribute("listalp", listalp);
+        }
+        request.getRequestDispatcher("JSP/carritoUsuario.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

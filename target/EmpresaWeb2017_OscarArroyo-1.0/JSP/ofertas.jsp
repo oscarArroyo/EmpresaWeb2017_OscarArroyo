@@ -25,7 +25,7 @@
         <script src="${contexto}/BOOTSTRAP/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Ofertas </title>
-   <script>
+        <script>
             function pagination(num) {
                 var req_num_row = num;
                 var $tr = jQuery('tbody tr');
@@ -78,16 +78,16 @@
             }
 
         </script>
-</head>
-<body>
-    <div class="container-fluid">
-        <jsp:include page="../INC/cabecera.jsp"/>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <jsp:include page="../INC/cabecera.jsp"/>
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                <table class="table">
-                    <thead>
+                <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                    <table class="table">
+                        <thead>
                         <th>Paginacion nº de registros </th>
                         <th> <div>
                                 <form action="#" name="formulario" method="post">   
@@ -97,39 +97,39 @@
                             </div>
                         </th>
                         </thead>
-                    <thead>
-                        <tr>
-                            <th>Imagen</th>
-                            <th class="denominacion">Denominacion <i class="fa fa-sort" aria-hidden="true"></i></th>
-                            <th>Categoria</th>
-                            <th>Marca</th>
-                            <th class="precio">Precio/&euro; <i class="fa fa-sort" aria-hidden="true"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${prods}" var="productos">
-                            <c:if test="${(productos.oferta=='s') && (productos.fueraCatalogo=='n')}">
+                        <thead>
                             <tr>
-                                <td><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"/></a></td>
-                                <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>
-                                <td class="txt"><a href="${contexto}/JSP/categorias.jsp?c=${productos.categoria}"><c:out value="${productos.categoria}"/></a></td>
-                                <td class="txt"><a href="${contexto}/JSP/marcas.jsp?p=${productos.marca}"><c:out value="${productos.marca}"/></a></td>
-                                <td class="txt"><fmt:formatNumber type="currency" maxFractionDigits="2" value="${productos.precioUnitario}" /></td>
+                                <th>Imagen</th>
+                                <th class="denominacion">Denominacion <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <th>Categoria</th>
+                                <th>Marca</th>
+                                <th class="precio">Precio/&euro; <i class="fa fa-sort" aria-hidden="true"></i></th>
                             </tr>
-                            </c:if>
-                        </c:forEach>     
-                    </tbody>
-                </table>
-                <div id="pagination" class="pagination">
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${prods}" var="productos">
+                                <c:if test="${(productos.oferta=='s') && (productos.fueraCatalogo=='n')}">
+                                    <tr>
+                                        <td><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"/></a></td>
+                                        <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>
+                                        <td class="txt"><a href="${contexto}/JSP/categorias.jsp?c=${productos.categoria}"><c:out value="${productos.categoria}"/></a></td>
+                                        <td class="txt"><a href="${contexto}/JSP/marcas.jsp?p=${productos.marca}"><c:out value="${productos.marca}"/></a></td>
+                                        <td class="txt"><fmt:formatNumber type="currency" maxFractionDigits="2" value="${productos.precioUnitario}" /></td>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>     
+                        </tbody>
+                    </table>
+                    <div id="pagination" class="pagination">
 
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-    <jsp:include page="../INC/pie.jsp"/> 
-    <script>
-             function sortTable(f, n) {
+        <jsp:include page="../INC/pie.jsp"/> 
+        <script>
+            function sortTable(f, n) {
                 var rows = $('.table tbody  tr').get();
 
                 rows.sort(function (a, b) {
@@ -174,5 +174,5 @@
             });
 
         </script>
-</body>
+    </body>
 </html>

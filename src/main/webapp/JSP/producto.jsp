@@ -29,13 +29,8 @@
         <div class="container-fluid">
             <jsp:include page="../INC/cabecera.jsp"/>
             <div class="row">
-
                 <div class="col-sm-10 col-xs-12 col-sm-offset-1 contenedor-producto"> 
-                    
-                        
-                    
                     <div class="col-xs-12 col-sm-5 carousel-pro">
-                        
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <c:set var="contador" value="0"/>
@@ -89,25 +84,24 @@
                 $(".carousel-inner .item:first").addClass("active");
             </script>    
             <script>
-                $('.add-cart').click(function(event) {
-			var idProducto = ${pro.idProducto};
-                        var stock = ${pro.stock};
-                        alert(stock);
-			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('${contexto}/Carrito', {
-				idProducto : idProducto,
-                                stock:stock
-			}, function(responseText) {
-                            if(stock!=0){
-				$('.carro').html(responseText);
-                            }else{
-                                $('.sinStock').html(responseText);
-                            }
-			}); 
-		});
+                $('.add-cart').click(function (event) {
+                    var idProducto = ${pro.idProducto};
+                    var stock = ${pro.stock};
+                    // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+                    $.post('${contexto}/Carrito', {
+                        idProducto: idProducto,
+                        stock: stock
+                    }, function (responseText) {
+                        if (stock != 0) {
+                            $('.carro').html(responseText);
+                        } else {
+                            $('.sinStock').html(responseText);
+                        }
+                    });
+                });
             </script>
         </div>
         <jsp:include page="../INC/pie.jsp"/> 
-        
+
     </body>
 </html>

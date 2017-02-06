@@ -18,12 +18,13 @@ import java.util.ArrayList;
  */
 public class UsuariosDAO implements IUsuariosDAO {
 
-    Usuarios usuario=null;
+    Usuarios usuario = null;
     String consulta;
     PreparedStatement preparada;
     Statement sentencia;
 
     @Override
+
     //Método para añadir un usuario
     public void addUsuario(Usuarios usu) {
         consulta = "insert into usuarios(Email,Clave,tipo) values(?,password(?),'u')";
@@ -40,6 +41,7 @@ public class UsuariosDAO implements IUsuariosDAO {
     }
 
     @Override
+
     //Método para obtener un usuario según su idUsuario
     public Usuarios getOne(String where) {
         try {
@@ -66,7 +68,9 @@ public class UsuariosDAO implements IUsuariosDAO {
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
+
     @Override
+
     //Método para actualizar la fecha del último acceso de un usuario según su idUsuario
     public void updateFechaAcceso(Usuarios usu) {
         try {
@@ -75,19 +79,20 @@ public class UsuariosDAO implements IUsuariosDAO {
             preparada.setInt(1, usu.getIdUsuario());
             preparada.executeUpdate();
         } catch (SQLException ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
     }
 
     @Override
+
     //Método para obtener el idUsuario,email,si esta bloqueado o no de todos los usuarios
     public ArrayList<Usuarios> getUsuarios() {
-         ArrayList<Usuarios> lista = new ArrayList();
+        ArrayList<Usuarios> lista = new ArrayList();
         consulta = "select idUsuario,email,bloqueado from usuarios";
         try {
-            sentencia= ConnectionFactory.getConnection().createStatement();
+            sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
                 while (resultado.next()) {
                     usuario = new Usuarios();
@@ -105,19 +110,20 @@ public class UsuariosDAO implements IUsuariosDAO {
 
         return lista;
     }
+
     @Override
+
     //Método para bloquear o desbloquear usuarios
-    public void updateUsuariosBloqueados(String eleccion,int idUsuario) {
+    public void updateUsuariosBloqueados(String eleccion, int idUsuario) {
         try {
-            String sql = "update Usuarios set bloqueado='"+eleccion+"' where idUsuario="+idUsuario;
+            String sql = "update Usuarios set bloqueado='" + eleccion + "' where idUsuario=" + idUsuario;
             sentencia = ConnectionFactory.getConnection().createStatement();
             sentencia.executeUpdate(sql);
-            
+
         } catch (SQLException ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
     }
-    }
-
+}

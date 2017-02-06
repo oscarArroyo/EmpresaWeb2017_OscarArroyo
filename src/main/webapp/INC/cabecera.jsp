@@ -75,9 +75,9 @@
 
         </div>
         <div class="row">
-            <div class=" navegador col-sm-10 col-xs-12 col-sm-offset-1">
-                <div id="navbar" class="navegador navbar-collapse">
-                    <ul class="nav navbar-nav">
+            <div class=" navegador col-sm-10 col-xs-12 col-sm-offset-1 ">
+                <div id="navbar" class="navegador navbar-collapse ">
+                    <ul class="nav navbar-nav ">
                         <li><a href="${contexto}/">Inicio</a></li>
                         <li><a href="${contexto}/JSP/catalogoProductos.jsp">Cat&aacute;logo de productos</a></li>
                         <li><a href="${contexto}/JSP/ofertas.jsp">Ofertas</a></li>

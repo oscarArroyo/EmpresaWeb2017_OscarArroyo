@@ -38,105 +38,112 @@ public class Administracion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
-        IProductosDAO pdao=daof.getProductosDAO();
-        IUsuariosDAO udao=daof.getUsuariosDAO();
+        IProductosDAO pdao = daof.getProductosDAO();
+        IUsuariosDAO udao = daof.getUsuariosDAO();
+        
         //Si el admin pulsa cancelar se vuelve al panel
-        if(request.getParameter("cancelar")!=null){
+        if (request.getParameter("cancelar") != null) {
             response.sendRedirect("JSP/panelAdministrador.jsp");
-        //Si el admin selecciona la opcion de ofertar producto, según chequeé o no el producto se ofertará o no
-        //También se recargará el contexto
-        }else if(request.getParameter("oferta")!=null){
-           int idProducto=Integer.parseInt(request.getParameter("idP"));
-           if(request.getParameter("chk").equals("on")){
-               String eleccion="s";
-            pdao.updateProductosOfertas(eleccion,idProducto);
-            ServletContext contexto=request.getServletContext();
-            ArrayList<Productos> listap=(ArrayList)contexto.getAttribute("prods");
-            for (int i = 0; i < listap.size(); i++) {
-                if(listap.get(i).getIdProducto()==idProducto){
-                    listap.get(i).setOferta(eleccion);
-                    break;
+
+            //Si el admin selecciona la opcion de ofertar producto, según chequeé o no el producto se ofertará o no
+            //También se recargará el contexto
+        } else if (request.getParameter("oferta") != null) {
+            int idProducto = Integer.parseInt(request.getParameter("idP"));
+            if (request.getParameter("chk").equals("on")) {
+                String eleccion = "s";
+                pdao.updateProductosOfertas(eleccion, idProducto);
+                ServletContext contexto = request.getServletContext();
+                ArrayList<Productos> listap = (ArrayList) contexto.getAttribute("prods");
+                for (int i = 0; i < listap.size(); i++) {
+                    if (listap.get(i).getIdProducto() == idProducto) {
+                        listap.get(i).setOferta(eleccion);
+                        break;
+                    }
                 }
-            }
-            contexto.setAttribute("prods", listap);
-           }else if(request.getParameter("chk").equals("off")){
-               String eleccion="n";
-                pdao.updateProductosOfertas(eleccion,idProducto);
-                ServletContext contexto=request.getServletContext();
-            ArrayList<Productos> listap=(ArrayList)contexto.getAttribute("prods");
-            for (int i = 0; i < listap.size(); i++) {
-                if(listap.get(i).getIdProducto()==idProducto){
-                    listap.get(i).setOferta(eleccion);
-                    break;
+                contexto.setAttribute("prods", listap);
+            } else if (request.getParameter("chk").equals("off")) {
+                String eleccion = "n";
+                pdao.updateProductosOfertas(eleccion, idProducto);
+                ServletContext contexto = request.getServletContext();
+                ArrayList<Productos> listap = (ArrayList) contexto.getAttribute("prods");
+                for (int i = 0; i < listap.size(); i++) {
+                    if (listap.get(i).getIdProducto() == idProducto) {
+                        listap.get(i).setOferta(eleccion);
+                        break;
+                    }
                 }
+                contexto.setAttribute("prods", listap);
             }
-            contexto.setAttribute("prods", listap);
-           }
-           //Si el admin selecciona la opcion de bloquear producto, según chequeé o no el producto se bloqueará o no 
-           //También se recargará el contexto
-        }else if(request.getParameter("bloPro")!=null){
-         int idProducto=Integer.parseInt(request.getParameter("idP"));
-           if(request.getParameter("chk").equals("on")){
-               String eleccion="s";
-            pdao.updateProductosBloqueados(eleccion,idProducto);
-            ServletContext contexto=request.getServletContext();
-            ArrayList<Productos> listap=(ArrayList)contexto.getAttribute("prods");
-            for (int i = 0; i < listap.size(); i++) {
-                if(listap.get(i).getIdProducto()==idProducto){
-                    listap.get(i).setFueraCatalogo(eleccion);
-                    break;
+
+            //Si el admin selecciona la opcion de bloquear producto, según chequeé o no el producto se bloqueará o no 
+            //También se recargará el contexto
+        } else if (request.getParameter("bloPro") != null) {
+            int idProducto = Integer.parseInt(request.getParameter("idP"));
+            if (request.getParameter("chk").equals("on")) {
+                String eleccion = "s";
+                pdao.updateProductosBloqueados(eleccion, idProducto);
+                ServletContext contexto = request.getServletContext();
+                ArrayList<Productos> listap = (ArrayList) contexto.getAttribute("prods");
+                for (int i = 0; i < listap.size(); i++) {
+                    if (listap.get(i).getIdProducto() == idProducto) {
+                        listap.get(i).setFueraCatalogo(eleccion);
+                        break;
+                    }
                 }
-            }
-            contexto.setAttribute("prods", listap);
-           }else if(request.getParameter("chk").equals("off")){
-               String eleccion="n";
-                pdao.updateProductosBloqueados(eleccion,idProducto);
-                ServletContext contexto=request.getServletContext();
-            ArrayList<Productos> listap=(ArrayList)contexto.getAttribute("prods");
-            for (int i = 0; i < listap.size(); i++) {
-                if(listap.get(i).getIdProducto()==idProducto){
-                    listap.get(i).setFueraCatalogo(eleccion);
-                    break;
+                contexto.setAttribute("prods", listap);
+            } else if (request.getParameter("chk").equals("off")) {
+                String eleccion = "n";
+                pdao.updateProductosBloqueados(eleccion, idProducto);
+                ServletContext contexto = request.getServletContext();
+                ArrayList<Productos> listap = (ArrayList) contexto.getAttribute("prods");
+                for (int i = 0; i < listap.size(); i++) {
+                    if (listap.get(i).getIdProducto() == idProducto) {
+                        listap.get(i).setFueraCatalogo(eleccion);
+                        break;
+                    }
                 }
+                contexto.setAttribute("prods", listap);
             }
-            contexto.setAttribute("prods", listap);
-           }
-           //Si el admin selecciona la opcion de bloquear usuarios, se cargará una lista con los usuarios registrados y se mandará a la jsp de bloquearUsuarios
-            }else if(request.getParameter("cu")!=null){
-                ArrayList<Usuarios> listaUsuarios=udao.getUsuarios();
-                request.setAttribute("listaUsuarios",listaUsuarios);
-                request.getRequestDispatcher("JSP/bloquearUsuarios.jsp").forward(request, response);
-           ////Si el admin selecciona la opcion de bloquear usuarios, según chequeé o no el usuario se bloqueará o no 
-            }else if(request.getParameter("bloUsu")!=null){
-                int idUsuario=Integer.parseInt(request.getParameter("idU"));
-           if(request.getParameter("chk").equals("on")){
-               String eleccion="s";
-           udao.updateUsuariosBloqueados(eleccion,idUsuario);
-           }else if(request.getParameter("chk").equals("off")){
-               String eleccion="n";
-                udao.updateUsuariosBloqueados(eleccion,idUsuario);
+            //Si el admin selecciona la opcion de bloquear usuarios, se cargará una lista con los usuarios registrados y se mandará a la jsp de bloquearUsuarios
+
+        } else if (request.getParameter("cu") != null) {
+            ArrayList<Usuarios> listaUsuarios = udao.getUsuarios();
+            request.setAttribute("listaUsuarios", listaUsuarios);
+            request.getRequestDispatcher("JSP/bloquearUsuarios.jsp").forward(request, response);
+
+            ////Si el admin selecciona la opcion de bloquear usuarios, según chequeé o no el usuario se bloqueará o no 
+        } else if (request.getParameter("bloUsu") != null) {
+            int idUsuario = Integer.parseInt(request.getParameter("idU"));
+            if (request.getParameter("chk").equals("on")) {
+                String eleccion = "s";
+                udao.updateUsuariosBloqueados(eleccion, idUsuario);
+            } else if (request.getParameter("chk").equals("off")) {
+                String eleccion = "n";
+                udao.updateUsuariosBloqueados(eleccion, idUsuario);
             }
-           //Si el admin selecciona la opcion de cambiar el precio a los productos, según el numero introducido en la caja de texto se cambiará su precio
-           //También se recargará el contexto
-        }else if(request.getParameter("camPro")!=null){
+
+            //Si el admin selecciona la opcion de cambiar el precio a los productos, según el numero introducido en la caja de texto se cambiará su precio
+            //También se recargará el contexto
+        } else if (request.getParameter("camPro") != null) {
             pdao.updateProductosPrecio(Float.parseFloat(request.getParameter("precio")), Integer.parseInt(request.getParameter("idP")));
-            ServletContext contexto=request.getServletContext();
-            ArrayList<Productos> listap=(ArrayList)contexto.getAttribute("prods");
+            ServletContext contexto = request.getServletContext();
+            ArrayList<Productos> listap = (ArrayList) contexto.getAttribute("prods");
             for (int i = 0; i < listap.size(); i++) {
-                if(listap.get(i).getIdProducto()==Integer.parseInt(request.getParameter("idP"))){
+                if (listap.get(i).getIdProducto() == Integer.parseInt(request.getParameter("idP"))) {
                     listap.get(i).setPrecioUnitario(Double.parseDouble(request.getParameter("precio")));
                     break;
                 }
             }
             contexto.setAttribute("prods", listap);
+
             //Si el admin selecciona la opcion de recargar el stock a los productos, se recargará en 20 el stock de ese producto
             //También se recargará el contexto
-        }else if(request.getParameter("stPro")!=null){
+        } else if (request.getParameter("stPro") != null) {
             pdao.updateProductosStock(Integer.parseInt(request.getParameter("idP")));
-            ServletContext contexto=request.getServletContext();
-            ArrayList<Productos> listap=(ArrayList)contexto.getAttribute("prods");
+            ServletContext contexto = request.getServletContext();
+            ArrayList<Productos> listap = (ArrayList) contexto.getAttribute("prods");
             for (int i = 0; i < listap.size(); i++) {
-                if(listap.get(i).getIdProducto()==Integer.parseInt(request.getParameter("idP"))){
+                if (listap.get(i).getIdProducto() == Integer.parseInt(request.getParameter("idP"))) {
                     listap.get(i).setStock(20);
                     break;
                 }

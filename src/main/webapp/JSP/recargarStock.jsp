@@ -87,8 +87,6 @@
             <jsp:include page="../INC/cabecera.jsp"/>
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-xs-offset-0 col-sm-offset-2 toppad" >
-
-
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">Panel del admin: <c:out value="${sesion.email}"/></h3>
@@ -98,9 +96,9 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
-                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
-                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
-                                    </c:if>
+                                        <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                        <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                        </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <form action="${contexto}/Administracion" method="post">
@@ -110,19 +108,16 @@
                                                     <td>Denominacion</td>
                                                     <td> Recargar? </td>
                                                 </tr>
-
                                                 <c:forEach items="${prods}" var="pro">
-                                                    
-                                                        
-                                                        <c:if test="${pro.stockMinimo>pro.stock}">
-                                                            <tr>
+                                                    <c:if test="${pro.stockMinimo>pro.stock}">
+                                                        <tr>
                                                             <td>${pro.denominacion}</td>
                                                             <td>
                                                                 <input type="checkbox" class="proSt" name="proSt">
                                                                 <input type="hidden" class="idP"  name="idP" value="${pro.idProducto}"></td>
-                                                            </tr>
-                                                        </c:if>
-                                                    
+                                                        </tr>
+                                                    </c:if>
+
                                                 </c:forEach>
                                             </tbody>
                                         </table>
@@ -133,31 +128,28 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-                                        <script>
-                $('.proSt').click(function(event) {
-                    alert("entro");
-                        $(this).parent().parent().remove();
-			var stPro="";
-                        if($(this).prop('checked')){
-                        var chk = 'on';
-                        }
-                        var idP = $(this).parent().find('.idP').val();
-                        alert(chk + idP);
-			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('${contexto}/Administracion', {
-                                stPro:stPro,
-                                chk:chk,
-				idP : idP
-			}, function(responseText) {
-                            
-			});
-		});
-       </script>
+        <script>
+            $('.proSt').click(function (event) {
+                $(this).parent().parent().remove();
+                var stPro = "";
+                if ($(this).prop('checked')) {
+                    var chk = 'on';
+                }
+                var idP = $(this).parent().find('.idP').val();
+// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+                $.post('${contexto}/Administracion', {
+                    stPro: stPro,
+                    chk: chk,
+                    idP: idP
+                }, function (responseText) {
+
+                });
+            });
+        </script>
         <jsp:include page="../INC/pie.jsp"/>
     </body>
 </html>

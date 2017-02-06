@@ -34,10 +34,8 @@
                     </div>
                 </div>
                 <div class="col-sm-offset-4 col-sm-4 col-xs-offset-1 col-xs-10">
-
                     <div class="main-login main-center">
                         <form class="form-horizontal" method="post" action="${contexto}/Login">
-
                             <div class="form-group">
                                 <label for="email" class="control-label">Email</label>
                                 <div class="cols-sm-10">
@@ -47,7 +45,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="password" class="control-label">Contrase&ntilde;a</label>
                                 <div class="cols-sm-10">

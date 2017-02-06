@@ -41,10 +41,10 @@
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
                                     <a href="${contexto}/HistorialCompras"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Historial de compras"/></a>
-                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
-                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
-                                    </c:if>
-                                    
+                                        <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                        <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                        </c:if>
+
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <table class="table table-user-information">
@@ -71,24 +71,19 @@
                                             </tr>
                                             <tr>
                                                 <td>Direcciones: </td>
-                                               
                                                 <td>
                                                     <ol>
-                                                         <c:forEach items="${direcciones}" var="dir">
-                                                             <li style="border: 1px solid white;">Nombre: <c:out value="${dir.nombreDireccion}"/><br/>Direccion: <c:out value="${dir.direccion}"/><br/>Codigo Postal: <c:out value="${dir.codigoPostal}"/></li>
-                                                        </c:forEach>
-                                                  </ol>
+                                                        <c:forEach items="${direcciones}" var="dir">
+                                                            <li style="border: 1px solid white;">Nombre: <c:out value="${dir.nombreDireccion}"/><br/>Direccion: <c:out value="${dir.direccion}"/><br/>Codigo Postal: <c:out value="${dir.codigoPostal}"/></li>
+                                                            </c:forEach>
+                                                    </ol>
                                                 </td>
-                                                
-                                                
                                             </tr>
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

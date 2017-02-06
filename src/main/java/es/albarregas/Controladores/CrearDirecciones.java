@@ -41,20 +41,22 @@ public class CrearDirecciones extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            DAOFactory daof = DAOFactory.getDAOFactory(1);
-            IPueblosDAO pbdao= daof.getPueblosDAO();
-            IDireccionesDAO ddao=daof.getDireccionesDAO();
-            IProvinciasDAO prodao=daof.getProvinciasDAO();
+        DAOFactory daof = DAOFactory.getDAOFactory(1);
+        IPueblosDAO pbdao = daof.getPueblosDAO();
+        IDireccionesDAO ddao = daof.getDireccionesDAO();
+        IProvinciasDAO prodao = daof.getProvinciasDAO();
+
         //Si el usuario pulsa el boton de cancelar se le redirige a la jsp panelUsuario
-        if(request.getParameter("cancelar")!=null){
+        if (request.getParameter("cancelar") != null) {
             response.sendRedirect("JSP/panelUsuario.jsp");
-        //Después de rellenar el formulario de direcciones se inserta en la base de datos y se inserta en la sesion
-        }else if(request.getParameter("aceptar")!=null){
-            String where=" where codigoPostal='"+request.getParameter("cod")+"'";
-            Pueblos pb=pbdao.getOne(where);
+
+            //Después de rellenar el formulario de direcciones se inserta en la base de datos y se inserta en la sesion
+        } else if (request.getParameter("aceptar") != null) {
+            String where = " where codigoPostal='" + request.getParameter("cod") + "'";
+            Pueblos pb = pbdao.getOne(where);
             Direcciones dir = new Direcciones();
             HttpSession sesion = request.getSession();
-            Clientes cli = (Clientes)sesion.getAttribute("cliente");
+            Clientes cli = (Clientes) sesion.getAttribute("cliente");
             dir.setIdCliente(cli.getIdCliente());
             dir.setNombreDireccion(request.getParameter("nbdir"));
             dir.setDireccion(request.getParameter("dir"));
@@ -64,15 +66,16 @@ public class CrearDirecciones extends HttpServlet {
             ddao.addDireccion(dir);
             String where2 = " Where IdCliente=" + cli.getIdCliente();
             ArrayList<Direcciones> listadir = ddao.getDirecciones(where2);
-            sesion.setAttribute("direcciones",listadir);
+            sesion.setAttribute("direcciones", listadir);
             response.sendRedirect("JSP/panelUsuario.jsp");
+
             //Busqueda con ajax del pueblo y la provincia mediante el código postal. Esto devuelve un Json
-        }else if(request.getParameter("btncodigo")!=null){
-            String where=" where codigoPostal='"+request.getParameter("cod")+"'";
-            Pueblos pb=pbdao.getOne(where);
-            String where2="where idProvincia="+pb.getIdProvincia();
-            Provincias pro =prodao.getOne(where2);
-            ArrayList<String> lista= new ArrayList();
+        } else if (request.getParameter("btncodigo") != null) {
+            String where = " where codigoPostal='" + request.getParameter("cod") + "'";
+            Pueblos pb = pbdao.getOne(where);
+            String where2 = "where idProvincia=" + pb.getIdProvincia();
+            Provincias pro = prodao.getOne(where2);
+            ArrayList<String> lista = new ArrayList();
             lista.add(pro.getNombre());
             lista.add(pb.getNombre());
             String json = new Gson().toJson(lista);

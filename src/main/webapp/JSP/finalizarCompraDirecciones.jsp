@@ -53,10 +53,10 @@
                         <table class="table table-user-information tabla-direcciones">
                             <tbody>
                                 <c:if test="${error!=null}">
-                                                <tr>
-                                                    <td colspan="2" style="color:red;">${error}</td>
-                                                </tr>
-                                            </c:if>
+                                    <tr>
+                                        <td colspan="2" style="color:red;">${error}</td>
+                                    </tr>
+                                </c:if>
                                 <tr>
                                     <td><a class="btn btn-default btn-sensitive" href="${contexto}/JSP/direcciones.jsp">Crear direccion</a></td>
                                     <td>
@@ -68,7 +68,7 @@
                                             </c:forEach>
                                         </select>
                                     </td>
-                                    
+
                                 </tr>
                                 <tr>
                                     <td>Nombre de la direccion: </td>
@@ -115,39 +115,37 @@
             $('.select-dir').change(function (event) {
                 var id = $(this).val();
                 var dir = "";
-                alert(id);
-// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
                 $.post('${contexto}/FinalizarPedido', {
                     id: id,
-                    dir:dir
+                    dir: dir
                 }, function (responseText) {
                     $.each(responseText, function (index, value) {
-                       switch(index){
-                           case 0:
-                               $('.nbdir').html("");
-                               $('.nbdir').append(value);
-                               break;
-                           case 1:
-                               $('.dir').html("");
-                               $('.dir').append(value);
-                               break;
-                           case 2:
-                               $('.tlf').html("");
-                               $('.tlf').append(value);
-                               break;
-                           case 3:
-                               $('.cod').html("");
-                               $('.cod').append(value);
-                               break;
-                           case 4:
-                               $('.pro').html("");
-                               $('.pro').append(value);
-                               break;
-                           case 5:
-                               $('.loc').html("");
-                               $('.loc').append(value);
-                               break;
-                       }
+                        switch (index) {
+                            case 0:
+                                $('.nbdir').html("");
+                                $('.nbdir').append(value);
+                                break;
+                            case 1:
+                                $('.dir').html("");
+                                $('.dir').append(value);
+                                break;
+                            case 2:
+                                $('.tlf').html("");
+                                $('.tlf').append(value);
+                                break;
+                            case 3:
+                                $('.cod').html("");
+                                $('.cod').append(value);
+                                break;
+                            case 4:
+                                $('.pro').html("");
+                                $('.pro').append(value);
+                                break;
+                            case 5:
+                                $('.loc').html("");
+                                $('.loc').append(value);
+                                break;
+                        }
                     });
                 });
             });

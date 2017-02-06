@@ -14,31 +14,33 @@ import java.util.ArrayList;
  *
  * @author Oscar
  */
-public class ImagenesDAO implements IImagenesDAO{
+public class ImagenesDAO implements IImagenesDAO {
 
     @Override
+
     //Método para obtener todas las url de las imágenes de un producto
     public ArrayList<String> getImagenes(String where) {
-         ArrayList<String> img = new ArrayList();
-         String consulta = "select Imagen from imagenes "+where;
-         try {
+        ArrayList<String> img = new ArrayList();
+        String consulta = "select Imagen from imagenes " + where;
+        try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
                 while (resultado.next()) {
                     img.add(resultado.getString("Imagen"));
-                }   }
+                }
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
-         
-         return img;
+
+        return img;
     }
 
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
-    
+
 }

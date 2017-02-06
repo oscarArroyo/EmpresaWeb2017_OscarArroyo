@@ -16,19 +16,21 @@ import java.util.ArrayList;
  *
  * @author Oscar
  */
-public class PedidosDAO implements IPedidosDAO{
+public class PedidosDAO implements IPedidosDAO {
 
     Pedidos pedido;
     String consulta;
     PreparedStatement preparada;
     Statement sentencia;
+
     @Override
+
     //Método para añadir un pedido
     public void addPedido(Pedidos pedido) {
-         consulta = "insert into pedidos(fecha,estado,idCliente) values(now(),?,?)";
+        consulta = "insert into pedidos(fecha,estado,idCliente) values(now(),?,?)";
         try {
             preparada = ConnectionFactory.getConnection().prepareStatement(consulta);
-            preparada.setString(1,String.valueOf(pedido.getEstado()));
+            preparada.setString(1, String.valueOf(pedido.getEstado()));
             preparada.setInt(2, pedido.getIdCliente());
             preparada.executeUpdate();
         } catch (SQLException ex) {
@@ -37,18 +39,20 @@ public class PedidosDAO implements IPedidosDAO{
             this.closeConnection();
         }
     }
+
     @Override
+
     //Método para obtener el idPedido a partir del idCliente
     public Pedidos getOne(String where) {
-        consulta ="select IdPedido,estado from pedidos " +where;
+        consulta = "select IdPedido,estado from pedidos " + where;
         try {
             sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
-                while (resultado.next()){
-                    pedido=new Pedidos();
+                while (resultado.next()) {
+                    pedido = new Pedidos();
                     pedido.setIdPedido(resultado.getInt("IdPedido"));
                     pedido.setEstado(resultado.getString("estado").charAt(0));
-                    }
+                }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -57,34 +61,37 @@ public class PedidosDAO implements IPedidosDAO{
         }
         return pedido;
     }
-     @Override
+
+    @Override
+
     //Método para borrar un pedido cuando no haya lineas de ese pedido
     public void deletePedido(String where) {
-        consulta = "delete from pedidos "+where;    
+        consulta = "delete from pedidos " + where;
         try {
 
-             sentencia = ConnectionFactory.getConnection().createStatement();
-             sentencia.executeUpdate(consulta);
-             
-   
+            sentencia = ConnectionFactory.getConnection().createStatement();
+            sentencia.executeUpdate(consulta);
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
     }
+
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
 
     @Override
+
     //Método para actualizar el pedido de estado nuevo a estado remitido al cual se le añade los gastos de envio,iva e idDireccion
     public void updatePedido(Pedidos pedido) {
-         try {
+        try {
             String sql = "update Pedidos set estado=?,gastosEnvio=?,iva=?,idDireccion=?,baseImponible=? where idCliente=? and estado='n'";
             preparada = ConnectionFactory.getConnection().prepareStatement(sql);
-            preparada.setString(1,String.valueOf(pedido.getEstado()));
+            preparada.setString(1, String.valueOf(pedido.getEstado()));
             preparada.setDouble(2, pedido.getGastosEnvio());
             preparada.setDouble(3, pedido.getIva());
             preparada.setInt(4, pedido.getIdDireccion());
@@ -92,24 +99,26 @@ public class PedidosDAO implements IPedidosDAO{
             preparada.setInt(6, pedido.getIdCliente());
             preparada.executeUpdate();
         } catch (SQLException ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
-    
+
     }
 
     @Override
+
+    //Métodod para sacar todos los pedidos
     public ArrayList<Pedidos> getPedidos(String where) {
         ArrayList<Pedidos> lista = new ArrayList();
-        consulta = "select idPedido,fecha,baseImponible,gastosEnvio,iva,IdPedido from pedidos " + where;
-        System.out.println("Consulta: "+consulta);
+        consulta = "select idPedido,estado,fecha,baseImponible,gastosEnvio,iva,IdPedido from pedidos " + where;
         try {
             sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
                 while (resultado.next()) {
                     pedido = new Pedidos();
                     pedido.setIdPedido(resultado.getInt("idPedido"));
+                    pedido.setEstado(resultado.getString("estado").charAt(0));
                     pedido.setFecha(resultado.getDate("fecha"));
                     pedido.setBaseImponible(resultado.getDouble("baseImponible"));
                     pedido.setGastosEnvio(resultado.getDouble("gastosEnvio"));
@@ -126,5 +135,5 @@ public class PedidosDAO implements IPedidosDAO{
         }
         return lista;
     }
-    
+
 }

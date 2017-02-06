@@ -38,10 +38,12 @@ public class PanelCliente extends HttpServlet {
             throws ServletException, IOException {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
         IClientesDAO cdao = daof.getClientesDAO();
+
         //Si el usuario ha pulsado el boton de cancelar se redirige a otra página
         if (request.getParameter("cancelar") != null) {
             response.sendRedirect("JSP/panelUsuario.jsp");
         } else if (request.getParameter("aceptar") != null) {
+
             //Método para actualizar los datos personales de un cliente. Recoge los campos de un formulario y los añade al modelo cliente.
             //Si ningun dato personal de los que estan almacenados en la base de datos respecto a este cliente cambia no se actualiza
             //También se actualiza el cliente en la sesión
@@ -51,16 +53,16 @@ public class PanelCliente extends HttpServlet {
             cliente.setApellidos(request.getParameter("apellidos"));
             cliente.setNif(request.getParameter("nif"));
             cliente.setFechaNacimiento(Date.valueOf(request.getParameter("fnacimiento")));
-            Usuarios usuario=(Usuarios)sesion.getAttribute("sesion");
+            Usuarios usuario = (Usuarios) sesion.getAttribute("sesion");
             cliente.setIdCliente(usuario.getIdUsuario());
             Clientes cli2 = (Clientes) sesion.getAttribute("cliente");
-            if(!cliente.getNombre().equals(cli2.getNombre())||!cliente.getApellidos().equals(cli2.getApellidos()) || !cliente.getNif().equals(cli2.getNif()) || !cliente.getFechaNacimiento().equals(cli2.getFechaNacimiento())){
-            cdao.updateClientes(cliente);
-            cliente.setFechaAlta(cli2.getFechaAlta());
-            sesion.setAttribute("cliente", cliente);
+            if (!cliente.getNombre().equals(cli2.getNombre()) || !cliente.getApellidos().equals(cli2.getApellidos()) || !cliente.getNif().equals(cli2.getNif()) || !cliente.getFechaNacimiento().equals(cli2.getFechaNacimiento())) {
+                cdao.updateClientes(cliente);
+                cliente.setFechaAlta(cli2.getFechaAlta());
+                sesion.setAttribute("cliente", cliente);
             }
             response.sendRedirect("JSP/panelUsuario.jsp");
-            
+
         }
     }
 

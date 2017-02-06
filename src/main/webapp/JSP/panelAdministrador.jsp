@@ -41,18 +41,15 @@
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
                                     <a href="${contexto}/HistorialCompras"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Historial de compras"/></a>
-                                    
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <table class="table table-user-information">
                                         <tbody>
                                             <tr>
                                                 <td><a href="${contexto}/JSP/ofertarProductos.jsp">Ofertar productos</a></td>
-                                               
                                             </tr>
                                             <tr>
                                                 <td><a href="${contexto}/JSP/cambiarPrecio.jsp">Cambiar precio a los productos</a></td>
-                                                
                                             </tr>
                                             <tr>
                                                 <td><a href="${contexto}/JSP/bloquearProductos.jsp">Bloquear productos</a></td>
@@ -65,11 +62,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

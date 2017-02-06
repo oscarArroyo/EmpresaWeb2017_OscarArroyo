@@ -23,6 +23,7 @@ public class ProductosDAO implements IProductosDAO {
     Statement sentencia;
 
     @Override
+
     //Método que carga todos los productos en la aplicacion mediante el evento de inicializacion del contexto
     public ArrayList<Productos> getProductos() {
         ArrayList<Productos> lista = new ArrayList();
@@ -59,9 +60,10 @@ public class ProductosDAO implements IProductosDAO {
     }
 
     @Override
+
     //Método para obtener un producto según su idProducto
     public Productos getOne(String where) {
-        consulta ="select idProducto,Productos.Denominacion,Productos.descripcion,PrecioUnitario,Stock,StockMinimo,Marcas.denominacion,Categorias.nombre from productos inner join marcas using (idMarca) inner join categorias using (idCategoria)" +where;
+        consulta = "select idProducto,Productos.Denominacion,Productos.descripcion,PrecioUnitario,Stock,StockMinimo,Marcas.denominacion,Categorias.nombre from productos inner join marcas using (idMarca) inner join categorias using (idCategoria)" + where;
         try {
             sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
@@ -75,7 +77,7 @@ public class ProductosDAO implements IProductosDAO {
                     producto.setStockMinimo(resultado.getInt("StockMinimo"));
                     producto.setMarca(resultado.getString("Marcas.Denominacion"));
                     producto.setCategoria(resultado.getString("Categorias.Nombre"));
-                    }
+                }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -84,12 +86,14 @@ public class ProductosDAO implements IProductosDAO {
         }
         return producto;
     }
+
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
 
     @Override
+
     //Método para actualizar el stock de un producto según su idProducto
     public void updateProductos(Productos pro) {
         try {
@@ -98,66 +102,73 @@ public class ProductosDAO implements IProductosDAO {
             preparada.setInt(1, pro.getStock());
             preparada.setInt(2, pro.getIdProducto());
             preparada.executeUpdate();
-            
+
         } catch (SQLException ex) {
-          ex.printStackTrace();
-        } finally {
-            this.closeConnection();
-        }
-    }
-    @Override
-    //Método para ofertar o desofertar un producto
-    public void updateProductosOfertas(String eleccion,int idProducto){
-        try {
-            String sql = "update Productos set oferta='"+eleccion+"' where idProducto="+idProducto;
-            sentencia = ConnectionFactory.getConnection().createStatement();
-            sentencia.executeUpdate(sql);
-            
-        } catch (SQLException ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
     }
 
     @Override
+
+    //Método para ofertar o desofertar un producto
+    public void updateProductosOfertas(String eleccion, int idProducto) {
+        try {
+            String sql = "update Productos set oferta='" + eleccion + "' where idProducto=" + idProducto;
+            sentencia = ConnectionFactory.getConnection().createStatement();
+            sentencia.executeUpdate(sql);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            this.closeConnection();
+        }
+    }
+
+    @Override
+
     //Método para bloquear o desbloquear un producto
-    public void updateProductosBloqueados(String eleccion,int idProducto) {
+    public void updateProductosBloqueados(String eleccion, int idProducto) {
         try {
-            String sql = "update Productos set fueraCatalogo='"+eleccion+"' where idProducto="+idProducto;
+            String sql = "update Productos set fueraCatalogo='" + eleccion + "' where idProducto=" + idProducto;
             sentencia = ConnectionFactory.getConnection().createStatement();
             sentencia.executeUpdate(sql);
-            
+
         } catch (SQLException ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
     }
+
     @Override
+
     //Método para actualizar el precio de un producto
-    public void updateProductosPrecio(float precioNuevo,int idProducto){
+    public void updateProductosPrecio(float precioNuevo, int idProducto) {
         try {
-            String sql = "update Productos set precioUnitario='"+precioNuevo+"' where idProducto="+idProducto;
+            String sql = "update Productos set precioUnitario='" + precioNuevo + "' where idProducto=" + idProducto;
             sentencia = ConnectionFactory.getConnection().createStatement();
             sentencia.executeUpdate(sql);
-            
+
         } catch (SQLException ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
     }
-    //Método para actualizar el stock de un producto
+
     @Override
-    public void updateProductosStock(int idProducto){
+
+    //Método para actualizar el stock de un producto
+    public void updateProductosStock(int idProducto) {
         try {
-            String sql = "update Productos set stock=20 where idProducto="+idProducto;
+            String sql = "update Productos set stock=20 where idProducto=" + idProducto;
             sentencia = ConnectionFactory.getConnection().createStatement();
             sentencia.executeUpdate(sql);
-            
+
         } catch (SQLException ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             this.closeConnection();
         }

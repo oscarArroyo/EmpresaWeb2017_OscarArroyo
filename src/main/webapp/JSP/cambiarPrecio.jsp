@@ -98,9 +98,9 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
-                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
-                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
-                                    </c:if>
+                                        <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                        <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                        </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <form action="${contexto}/Administracion" method="post">
@@ -137,23 +137,20 @@
                 </div>
             </div>
         </div>
-                                        <script>
-                $('.proCam').click(function(event) {
-                    alert("entro");
-			var camPro="";
-                        var precio = $(this).parent().find('.precio').val();
-                        var idP = $(this).parent().find('.idP').val();
-                        alert(precio + idP);
-			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('${contexto}/Administracion', {
-                                camPro:camPro,
-                                precio:precio,
-				idP : idP
-			}, function(responseText) {
-                            
-			});
-		});
-       </script>
+        <script>
+            $('.proCam').click(function (event) {
+                var camPro = "";
+                var precio = $(this).parent().find('.precio').val();
+                var idP = $(this).parent().find('.idP').val();
+                $.post('${contexto}/Administracion', {
+                    camPro: camPro,
+                    precio: precio,
+                    idP: idP
+                }, function (responseText) {
+
+                });
+            });
+        </script>
         <jsp:include page="../INC/pie.jsp"/>
     </body>
 </html>

@@ -16,17 +16,19 @@ import java.sql.Statement;
  *
  * @author Oscar
  */
-public class ClientesDAO implements IClientesDAO{
+public class ClientesDAO implements IClientesDAO {
+
     Clientes cliente;
     String consulta;
     Statement sentencia;
     PreparedStatement preparada;
 
     @Override
+
     //Método para inizialidar un cliente cuando se registra un Usuario. Se introducen todos los datos a vacio excepto el idCliente que es el mismo
     //que el id del usuario que se acaba de registrar
     public void inicializarClientes(int idUsuario) {
-        consulta = "insert into Clientes(IdCliente,Nombre,Apellidos,NIF,FechaAlta) values("+idUsuario+",'','','',now())";
+        consulta = "insert into Clientes(IdCliente,Nombre,Apellidos,NIF,FechaAlta) values(" + idUsuario + ",'','','',now())";
         try {
             sentencia = ConnectionFactory.getConnection().createStatement();
             sentencia.executeUpdate(consulta);
@@ -43,6 +45,7 @@ public class ClientesDAO implements IClientesDAO{
     }
 
     @Override
+
     //Método para obtener un cliente
     public Clientes getOne(String where) {
         try {
@@ -66,9 +69,10 @@ public class ClientesDAO implements IClientesDAO{
     }
 
     @Override
+
     //Metodo par actualizar los datos de un cliente
     public void updateClientes(Clientes cliente) {
-         try {
+        try {
             String sql = "update Clientes set nombre=?,apellidos=?,nif=?,fechaNacimiento=? where idCliente=?";
             preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.setString(1, cliente.getNombre());
@@ -78,14 +82,10 @@ public class ClientesDAO implements IClientesDAO{
             preparada.setInt(5, cliente.getIdCliente());
             preparada.executeUpdate();
         } catch (SQLException ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             this.closeConnection();
         }
     }
 
- 
-    
-    }
-    
-
+}

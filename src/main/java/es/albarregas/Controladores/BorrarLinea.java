@@ -39,28 +39,30 @@ public class BorrarLinea extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
+
         //Se borra la linea de pedido que ha seleccionado el usuario. Se borra de la base de datos y de la sesión.
         ILineasPedidosDAO lpdao = daof.getLineasPedidosDAO();
         IPedidosDAO pdao = daof.getPedidosDAO();
         HttpSession sesion = request.getSession();
-        Clientes cliente = (Clientes)sesion.getAttribute("cliente");
-        String where="where idCliente="+cliente.getIdCliente();
+        Clientes cliente = (Clientes) sesion.getAttribute("cliente");
+        String where = "where idCliente=" + cliente.getIdCliente();
         Pedidos pedido = pdao.getOne(where);
-        String where2= "where numerolinea="+request.getParameter("nl")+ " and idPedido="+pedido.getIdPedido() ;
+        String where2 = "where numerolinea=" + request.getParameter("nl") + " and idPedido=" + pedido.getIdPedido();
         lpdao.deleteLineaPedido(where2);
-        Pedidos pedidos = (Pedidos)sesion.getAttribute("pedido");
-        String where3="where idPedido="+pedidos.getIdPedido();
+        Pedidos pedidos = (Pedidos) sesion.getAttribute("pedido");
+        String where3 = "where idPedido=" + pedidos.getIdPedido();
         ArrayList<LineasPedidos> listalp = lpdao.getLineasPedidos(where3);
         pedidos.setLineasPedidos(listalp);
         sesion.setAttribute("pedido", pedidos);
+
         //Si no hay líneas de pedidos sobre ese pedido también se borra el pedido
-        if(listalp.isEmpty()){
+        if (listalp.isEmpty()) {
             pdao.deletePedido(where3);
             sesion.removeAttribute("pedido");
             sesion.removeAttribute("listalp");
         }
         response.getWriter().write(String.valueOf(listalp.size()));
-           
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

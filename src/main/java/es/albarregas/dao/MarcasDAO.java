@@ -15,9 +15,10 @@ import java.util.ArrayList;
  *
  * @author Oscar
  */
-public class MarcasDAO implements IMarcasDAO{
+public class MarcasDAO implements IMarcasDAO {
 
     @Override
+
     //Método para obtener el nombre y el id de todas las marcas
     public ArrayList<Marcas> getMarcas() {
         ArrayList<Marcas> mar = new ArrayList();

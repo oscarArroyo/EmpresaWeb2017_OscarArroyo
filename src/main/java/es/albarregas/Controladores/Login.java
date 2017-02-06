@@ -53,11 +53,14 @@ public class Login extends HttpServlet {
         Usuarios usu;
         Clientes cli;
         HttpSession sesion;
+
         //Método al cual se accede si el usuario ha rellenado el registro
         if (request.getParameter("registro") != null) {
+
             //Preguntamos si el email esta en nuestra base de datos
             String where = "Where Email='" + request.getParameter("usuario") + "'";
             usu = udao.getOne(where);
+
             //Si no lo encontramos creamos un registro en la tabla usuarios con el email y la clave y otro en la tabla clientes con los datos vacíos
             //Solo se rellena el campo idCliente que es el mismo que el idUsuario que se acaba de crear
             //Estos dos registros se añaden a la sesion
@@ -78,26 +81,30 @@ public class Login extends HttpServlet {
                 sesion.setAttribute("cliente", cli);
                 url = "JSP/panelUsuario.jsp";
             } else {
+
                 //Si el email esta registrado mostramos un mensaje de error
                 request.setAttribute("error3", "Este email ya esta registrado");
                 url = "JSP/registro.jsp";
             }
             request.getRequestDispatcher(url).forward(request, response);
+
             //Método al cual se accede si el usuario ha rellenado el formulario de logeo
         } else if (request.getParameter("lg") != null) {
+
             //Se busca si el email introducido en el formulario se encuentra en la base de datos
-            String where = "Where clave=password('" + request.getParameter("passLog") + "') and email='"+request.getParameter("emLog")+"'";
+            String where = "Where clave=password('" + request.getParameter("passLog") + "') and email='" + request.getParameter("emLog") + "'";
             usu = udao.getOne(where);
+
             //Si no se encuentra se muestra un mensaje
             if (usu == null) {
                 request.setAttribute("error", "Email incorrecto o contraseña incorrectos");
+
                 //Si el email se encuentra y la clave es correcta se crea la sesion con el usuario y el cliente
                 //Además se comprobará si tiene algun pedido nuevo y si tiene alguno se añadira a la sesión (carrito persistente)
                 //También añadirá a la sesión las direcciones de ese cliente
+            } else if (usu.getBloqueado() == 's') {
+                request.setAttribute("error4", "Usuario bloqueado");
             } else {
-                if(usu.getBloqueado()=='s'){
-                    request.setAttribute("error4", "Usuario bloqueado");
-                }else{
                 sesion = request.getSession(true);
                 int idCliente = usu.getIdUsuario();
                 String where2 = "Where IdCliente=" + idCliente;
@@ -107,7 +114,7 @@ public class Login extends HttpServlet {
                 sesion.setAttribute("cliente", cli);
                 udao.updateFechaAcceso(usu);
                 Pedidos pedido = pdao.getOne(where2);
-                if (pedido != null && pedido.getEstado()=='n') {
+                if (pedido != null && pedido.getEstado() == 'n') {
                     where2 = "Where IdPedido=" + pedido.getIdPedido();
                     ArrayList<LineasPedidos> listalp = lpdao.getLineasPedidos(where2);
                     pedido.setLineasPedidos(listalp);
@@ -116,11 +123,10 @@ public class Login extends HttpServlet {
                 String where3 = " Where IdCliente=" + idCliente;
                 ArrayList<Direcciones> listadir = ddao.getDirecciones(where3);
                 sesion.setAttribute("direcciones", listadir);
-                }
-                }
+            }
             request.getRequestDispatcher("index.jsp").forward(request, response);
+
             //Método para cerrar la sesión del usuario
-                
         } else if (request.getParameter("cs").equals("s")) {
             sesion = request.getSession();
             sesion.invalidate();

@@ -51,7 +51,7 @@
                             <a href="#" class="bs-wizard-dot"></a>
                             <div class="bs-wizard-info text-center">Pago</div>
                         </div>
-
+                            
                     </div>
                     <div class="panel panel-default credit-card-box">
                         <div class="panel-heading display-table" >
@@ -94,12 +94,10 @@
                                         <input type="submit" name="aceptarPago" class="subscribe btn btn-success btn-lg btn-block" value="Finalizar pago">
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>            
                 </div>
-
             </div>
         </div>
         <jsp:include page="../INC/pie.jsp"/>

@@ -40,45 +40,48 @@ public class Carrito extends HttpServlet {
             throws ServletException, IOException {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
         IPedidosDAO pdao = daof.getPedidosDAO();
-        ILineasPedidosDAO lpdao =daof.getLineasPedidosDAO();
+        ILineasPedidosDAO lpdao = daof.getLineasPedidosDAO();
         Pedidos pedido = new Pedidos();
         LineasPedidos lp = new LineasPedidos();
         ArrayList<LineasPedidos> listalp = new ArrayList();
         HttpSession sesion = request.getSession();
+
         //Si el usuario pulsa el boton de añadir al carro y el stock de ese producto es 0 no lo dejamos añadir y mostramos un mensaje mediante ajax
-        if(Integer.parseInt(request.getParameter("stock"))==0){
+        if (Integer.parseInt(request.getParameter("stock")) == 0) {
             response.getWriter().write("No disponemos de unidades para este producto, lo sentimos");
-        }else{
-        //Preguntamos si el pedido en la sesión es nulo si es nulo, si es nulo lo creamos en la base de datos y lo añadimos a la sesión
-        //Si no es nulo se modifican las lineas de pedido de ese producto y se asigna la cantidad a 1
-        if(sesion.getAttribute("pedido")==null){
-        pedido.setEstado('n');
-        Clientes cliente=(Clientes)sesion.getAttribute("cliente");
-        pedido.setIdCliente(cliente.getIdCliente());
-        String where="where idCliente="+cliente.getIdCliente()+" and estado='"+pedido.getEstado()+"'";
-        pdao.addPedido(pedido);
-        Pedidos pedido2=pdao.getOne(where);
-        pedido.setIdPedido(pedido2.getIdPedido());
-        sesion.setAttribute("pedido", pedido);
-       
-        }
-        Pedidos pedido3=(Pedidos)sesion.getAttribute("pedido");
-        pedido3.setIdPedido(pedido3.getIdPedido());
-        lp.setIdPedido(pedido3.getIdPedido());
-        lp.setCantidad(1);
-        if(pedido3.getLineasPedidos()==null){
-            lp.setNumeroLinea(1);
-        }else{
-            listalp=pedido3.getLineasPedidos();
-            //Inserta el numero de linea en la ultima posicion ocupada +1 
-            lp.setNumeroLinea(pedido3.getLineasPedidos().get(pedido3.getLineasPedidos().size()-1).getNumeroLinea()+1);
-        }
-        lp.setIdProducto(Integer.parseInt(request.getParameter("idProducto")));
-        listalp.add(lp);
-        lpdao.addLineaPedido(lp); 
-        pedido.setLineasPedidos(listalp);
-        sesion.setAttribute("pedido", pedido3);
-        response.getWriter().write(String.valueOf(listalp.size()));  
+        } else {
+
+            //Preguntamos si el pedido en la sesión es nulo si es nulo, si es nulo lo creamos en la base de datos y lo añadimos a la sesión
+            //Si no es nulo se modifican las lineas de pedido de ese producto y se asigna la cantidad a 1
+            if (sesion.getAttribute("pedido") == null) {
+                pedido.setEstado('n');
+                Clientes cliente = (Clientes) sesion.getAttribute("cliente");
+                pedido.setIdCliente(cliente.getIdCliente());
+                String where = "where idCliente=" + cliente.getIdCliente() + " and estado='" + pedido.getEstado() + "'";
+                pdao.addPedido(pedido);
+                Pedidos pedido2 = pdao.getOne(where);
+                pedido.setIdPedido(pedido2.getIdPedido());
+                sesion.setAttribute("pedido", pedido);
+
+            }
+            Pedidos pedido3 = (Pedidos) sesion.getAttribute("pedido");
+            pedido3.setIdPedido(pedido3.getIdPedido());
+            lp.setIdPedido(pedido3.getIdPedido());
+            lp.setCantidad(1);
+            if (pedido3.getLineasPedidos() == null) {
+                lp.setNumeroLinea(1);
+            } else {
+                listalp = pedido3.getLineasPedidos();
+
+                //Inserta el numero de linea en la ultima posicion ocupada +1 
+                lp.setNumeroLinea(pedido3.getLineasPedidos().get(pedido3.getLineasPedidos().size() - 1).getNumeroLinea() + 1);
+            }
+            lp.setIdProducto(Integer.parseInt(request.getParameter("idProducto")));
+            listalp.add(lp);
+            lpdao.addLineaPedido(lp);
+            pedido.setLineasPedidos(listalp);
+            sesion.setAttribute("pedido", pedido3);
+            response.getWriter().write(String.valueOf(listalp.size()));
         }
     }
 

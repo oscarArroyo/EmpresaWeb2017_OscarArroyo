@@ -22,7 +22,7 @@
         <script type="text/javascript" language="javascript" src="${contexto}/BOOTSTRAP/jquery-3.1.1.js"></script>
         <script src="${contexto}/BOOTSTRAP/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Ofertar productos</title>
+        <title>Bloquear usuarios</title>
     </head>
     <body>
         <script>
@@ -98,9 +98,9 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
-                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
-                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
-                                    </c:if>
+                                        <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                        <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                        </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <form action="${contexto}/Administracion" method="post">
@@ -118,11 +118,11 @@
 
                                                             <c:when test="${usu.bloqueado=='s'.charAt(0)}">
                                                                 <td><input type="checkbox" class="usuBlo" name="usuBlo" checked="">
-                                                                <input type="hidden" class="idU"  name="idU" value="${usu.idUsuario}"></td></td>
+                                                                    <input type="hidden" class="idU"  name="idU" value="${usu.idUsuario}"></td></td>
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                 <td><input type="checkbox" class="usuBlo" name="usuBlo">
-                                                                <input type="hidden" class="idU"  name="idU" value="${usu.idUsuario}"></td></td>
+                                                                    <input type="hidden" class="idU"  name="idU" value="${usu.idUsuario}"></td></td>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                     </tr>
@@ -141,27 +141,24 @@
                 </div>
             </div>
         </div>
-                                        <script>
-                $('.usuBlo').click(function(event) {
-                    alert("entro");
-			var bloUsu="";
-                         if($(this).prop('checked')){
-                        var chk = 'on';
-                    }else{
-                        var chk='off';
-                    }
-                        var idU = $(this).parent().find('.idU').val();
-                        alert(chk + idU);
-			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('${contexto}/Administracion', {
-                                bloUsu:bloUsu,
-                                chk:chk,
-				idU : idU
-			}, function(responseText) {
-                            
-			});
-		});
-       </script>
+        <script>
+            $('.usuBlo').click(function (event) {
+                var bloUsu = "";
+                if ($(this).prop('checked')) {
+                    var chk = 'on';
+                } else {
+                    var chk = 'off';
+                }
+                var idU = $(this).parent().find('.idU').val();
+                $.post('${contexto}/Administracion', {
+                    bloUsu: bloUsu,
+                    chk: chk,
+                    idU: idU
+                }, function (responseText) {
+
+                });
+            });
+        </script>
         <jsp:include page="../INC/pie.jsp"/>
     </body>
 </html>
