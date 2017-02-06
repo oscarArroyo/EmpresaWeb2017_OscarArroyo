@@ -15,14 +15,14 @@
         <meta name="copyright" content="Desarrollo web entorno servidor" />
         <meta name="robots" content="index, follow" />
         <meta name="keywords" content="html" />
-        <meta name="description" content="Ofertar productos" />
+        <meta name="description" content="Bloquear productos" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${contexto}/BOOTSTRAP/css/bootstrap.min.css" rel="stylesheet">
         <link href="${contexto}/CSS/estilos.css" rel ="stylesheet">
         <script type="text/javascript" language="javascript" src="${contexto}/BOOTSTRAP/jquery-3.1.1.js"></script>
         <script src="${contexto}/BOOTSTRAP/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Ofertar productos</title>
+        <title>Bloquear Productos</title>
     </head>
     <body>
         <script>
@@ -87,8 +87,6 @@
             <jsp:include page="../INC/cabecera.jsp"/>
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-xs-offset-0 col-sm-offset-2 toppad" >
-
-
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">Panel del admin: <c:out value="${sesion.email}"/></h3>
@@ -98,7 +96,9 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
-
+                                        <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                        <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                        </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <form action="${contexto}/Administracion" method="post">
@@ -114,13 +114,14 @@
                                                         <td>${pro.denominacion}</td>
                                                         <c:choose>
 
-                                                            <c:when test="${pro.fueraCatalogo=='n'}">
-                                                                <td><input type="checkbox" name="proBlo" checked="">
-                                                                <input type="hidden" class="idP"  name="idP" value="${pro.idProducto}"></td></td>
+                                                            <c:when test="${pro.fueraCatalogo=='s'}">
+
+                                                                <td><input type="checkbox" class="proBlo" name="proBlo" checked="">
+                                                                    <input type="hidden" class="idP"  name="idP" value="${pro.idProducto}"></td></td>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                <td><input type="checkbox" name="proBlo">
-                                                                <input type="hidden" class="idP"  name="idP" value="${pro.idProducto}"></td></td>
+                                                                <td><input type="checkbox" class="proBlo" name="proBlo">
+                                                                    <input type="hidden" class="idP"  name="idP" value="${pro.idProducto}"></td></td>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                     </tr>
@@ -139,23 +140,27 @@
                 </div>
             </div>
         </div>
-                                        <script>
-                $('.proBlo').click(function(event) {
-                    alert("entro");
-			var bloPro="";
-                        var chk = $(this).val();
-                        var idP = $(this).parent().find('.idP').val();
-                        alert(chk + idP);
-			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
-			$.post('${contexto}/Administracion', {
-                                bloPro:bloPro,
-                                chk:chk,
-				idP : idP
-			}, function(responseText) {
-                            
-			});
-		});
-       </script>
+        <script>
+            $('.proBlo').click(function (event) {
+                alert("entro");
+                var bloPro = "";
+                if ($(this).prop('checked')) {
+                    var chk = 'on';
+                } else {
+                    var chk = 'off';
+                }
+                var idP = $(this).parent().find('.idP').val();
+                alert(chk + idP);
+                                                // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+                $.post('${contexto}/Administracion', {
+                    bloPro: bloPro,
+                    chk: chk,
+                    idP: idP
+                }, function (responseText) {
+
+                });
+            });
+        </script>
         <jsp:include page="../INC/pie.jsp"/>
     </body>
 </html>

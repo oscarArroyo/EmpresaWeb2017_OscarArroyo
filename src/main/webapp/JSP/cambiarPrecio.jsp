@@ -98,7 +98,9 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
-
+                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                    </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <form action="${contexto}/Administracion" method="post">
@@ -115,7 +117,7 @@
                                                         <td>${pro.denominacion}</td>
                                                         <td>${pro.precioUnitario}</td>
                                                         <td>
-                                                            <input type="text" pattern="^[0-9]$" name="precio">
+                                                            <input type="text" pattern="^[0-9]$" class="precio" name="precio">
                                                             <input type="hidden" class="idP"  name="idP" value="${pro.idProducto}">
                                                             <input type="button" class="proCam" value="Cambiar Precio">
                                                         </td>
@@ -139,13 +141,13 @@
                 $('.proCam').click(function(event) {
                     alert("entro");
 			var camPro="";
-                        var chk = $(this).val();
+                        var precio = $(this).parent().find('.precio').val();
                         var idP = $(this).parent().find('.idP').val();
-                        alert(chk + idP);
+                        alert(precio + idP);
 			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
 			$.post('${contexto}/Administracion', {
                                 camPro:camPro,
-                                chk:chk,
+                                precio:precio,
 				idP : idP
 			}, function(responseText) {
                             

@@ -6,6 +6,7 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Pedidos;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +16,7 @@ public interface IPedidosDAO {
     public void addPedido(Pedidos pedido);
     public void updatePedido(Pedidos pedido);
     public Pedidos getOne(String where);
+    public ArrayList<Pedidos> getPedidos(String where);
     public void deletePedido(String where);
     public void closeConnection();
 }

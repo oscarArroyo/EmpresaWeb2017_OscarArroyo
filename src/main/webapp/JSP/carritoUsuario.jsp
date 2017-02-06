@@ -6,6 +6,7 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -46,7 +47,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Denominacion</th>
-                                                <th>Precio / &euro;:</th>
+                                                <th>Precio unitario :</th>
                                                 <th>Cantidad: </th>
                                                 <th>Borrar producto: </th>
                                             </tr>
@@ -57,7 +58,7 @@
                                                     <c:if test="${producto.idProducto==lp.idProducto}">
                                             <tr>
                                                 <td>${producto.denominacion}</td>
-                                                <td>${producto.precioUnitario}</td>
+                                                <td><fmt:formatNumber type="currency" maxFractionDigits="2" value="${producto.precioUnitario}" /></td>
                                                 <td>
                                                     <select class="unidades">
                                                         <c:forEach begin="1" step="1" var="unidades" end="${producto.stock}">
@@ -73,7 +74,10 @@
                                                     </c:if>
                                                 </c:forEach>
                                             </c:forEach>
-                                                    
+                                           
+                                            <tr>
+                                                <td colspan="4"> <strong>Gastos de envío no incluidos</strong><br/><strong>IVA incluido</strong></td>
+                                            </tr>        
                                             <tr>
                                                 <td colspan="2"><a href="${contexto}/FinalizarPedido?boton=ace&pedido=${pedido.idPedido}"><button class="btn-success ace">Aceptar pedido</button></a></td>
                                                 <td colspan="2"><a href="${contexto}/FinalizarPedido?boton=can&pedido=${pedido.idPedido}"><button class="btn-danger can">Cancelar pedido</button></a></td>

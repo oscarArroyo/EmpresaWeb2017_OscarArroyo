@@ -40,6 +40,7 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
+                                    <a href="${contexto}/HistorialCompras"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Historial de compras"/></a>
                                     
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
@@ -57,7 +58,10 @@
                                                 <td><a href="${contexto}/JSP/bloquearProductos.jsp">Bloquear productos</a></td>
                                             </tr>
                                             <tr>
-                                                <td><a href="${contexto}/Administracion?cargaUsuarios=1">Bloquear Usuarios</a></td>
+                                                <td><a href="${contexto}/Administracion?cu=1">Bloquear Usuarios</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="${contexto}/JSP/recargarStock.jsp">Recargar Stock</a></td></td>
                                             </tr>
                                         </tbody>
                                     </table>

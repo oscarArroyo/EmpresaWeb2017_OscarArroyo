@@ -33,7 +33,7 @@
                         <div class="col-xs-3 bs-wizard-step complete">
                             <div class="text-center bs-wizard-stepnum">Paso 1</div>
                             <div class="progress"><div class="progress-bar"></div></div>
-                            <a href="#" class="bs-wizard-dot"></a>
+                            <a href="${contexto}/JSP/finalizarCompraDatos.jsp" class="bs-wizard-dot"></a>
                             <div class="bs-wizard-info text-center">Datos personales</div>
                         </div>
                         <div class="col-xs-3 bs-wizard-step active">

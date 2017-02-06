@@ -26,7 +26,7 @@ public class UsuariosDAO implements IUsuariosDAO {
     @Override
     //Método para añadir un usuario
     public void addUsuario(Usuarios usu) {
-        consulta = "insert into usuarios(Email,Clave,tipo) values(?,?,'u')";
+        consulta = "insert into usuarios(Email,Clave,tipo) values(?,password(?),'u')";
         try {
             preparada = ConnectionFactory.getConnection().prepareStatement(consulta);
             preparada.setString(1, usu.getEmail());
@@ -43,8 +43,8 @@ public class UsuariosDAO implements IUsuariosDAO {
     //Método para obtener un usuario según su idUsuario
     public Usuarios getOne(String where) {
         try {
-            consulta = "Select idUsuario,Email,Clave,tipo from Usuarios " + where;
-            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            consulta = "Select idUsuario,Email,Clave,tipo,bloqueado from Usuarios " + where;
+            sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             while (resultado.next()) {
                 usuario = new Usuarios();
@@ -52,6 +52,7 @@ public class UsuariosDAO implements IUsuariosDAO {
                 usuario.setEmail(resultado.getString("Email"));
                 usuario.setClave(resultado.getString("Clave"));
                 usuario.setTipo(resultado.getString("tipo").charAt(0));
+                usuario.setBloqueado(resultado.getString("bloqueado").charAt(0));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

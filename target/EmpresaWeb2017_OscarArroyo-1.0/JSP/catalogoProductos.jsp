@@ -113,13 +113,15 @@
                         </thead>
                         <tbody>
                             <c:forEach items="${prods}" var="productos">
+                                <c:if test="${productos.fueraCatalogo=='n'}">
                                 <tr>
                                     <td><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"/></a></td>
                                     <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>
                                     <td class="txt"><a href="${contexto}/JSP/categorias.jsp?c=${productos.categoria}"><c:out value="${productos.categoria}"/></a></td>
                                     <td class="txt"><a href="${contexto}/JSP/marcas.jsp?p=${productos.marca}"><c:out value="${productos.marca}"/></a></td>
                                     <td class="txt"><fmt:formatNumber type="currency" maxFractionDigits="2" value="${productos.precioUnitario}" /></td>
-                                </tr>  
+                                </tr>
+                                </c:if>
                             </c:forEach>     
                         </tbody>
                     </table>

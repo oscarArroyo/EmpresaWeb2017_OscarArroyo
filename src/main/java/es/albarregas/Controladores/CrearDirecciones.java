@@ -15,7 +15,6 @@ import es.albarregas.dao.IProvinciasDAO;
 import es.albarregas.dao.IPueblosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,11 +45,11 @@ public class CrearDirecciones extends HttpServlet {
             IPueblosDAO pbdao= daof.getPueblosDAO();
             IDireccionesDAO ddao=daof.getDireccionesDAO();
             IProvinciasDAO prodao=daof.getProvinciasDAO();
-          
+        //Si el usuario pulsa el boton de cancelar se le redirige a la jsp panelUsuario
         if(request.getParameter("cancelar")!=null){
             response.sendRedirect("JSP/panelUsuario.jsp");
+        //Después de rellenar el formulario de direcciones se inserta en la base de datos y se inserta en la sesion
         }else if(request.getParameter("aceptar")!=null){
-            System.out.println("Entro aceptar");
             String where=" where codigoPostal='"+request.getParameter("cod")+"'";
             Pueblos pb=pbdao.getOne(where);
             Direcciones dir = new Direcciones();
@@ -67,7 +66,7 @@ public class CrearDirecciones extends HttpServlet {
             ArrayList<Direcciones> listadir = ddao.getDirecciones(where2);
             sesion.setAttribute("direcciones",listadir);
             response.sendRedirect("JSP/panelUsuario.jsp");
-            
+            //Busqueda con ajax del pueblo y la provincia mediante el código postal. Esto devuelve un Json
         }else if(request.getParameter("btncodigo")!=null){
             String where=" where codigoPostal='"+request.getParameter("cod")+"'";
             Pueblos pb=pbdao.getOne(where);

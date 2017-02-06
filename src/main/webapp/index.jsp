@@ -28,6 +28,7 @@
             <div class="row">
                 
                 <div class="contendor col-xs-12 col-sm-12">
+                    <a href="${contexto}/JSP/factura.jsp">asd</a>
                     <div class="col-xs-12 col-sm-5 col-sm-offset-2">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">

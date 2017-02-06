@@ -7,7 +7,6 @@ package es.albarregas.Controladores;
 
 import es.albarregas.beans.Productos;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,6 +33,8 @@ public class Buscador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       //Busca la palabra introducida en la caja de texto. La busca sobre denominacion del producto,marca,categoría.
+       //Si se encuentra se añade a un arrayList de productos para su visualizacion posteriormente
        response.setContentType("text/html;charset=UTF-8");
        String busqueda = request.getParameter("buscador").toLowerCase();
        ServletContext contexto = getServletContext();
@@ -42,7 +43,8 @@ public class Buscador extends HttpServlet {
        for(int i=0;i<productos.size();i++){
            if(productos.get(i).getDenominacion().toLowerCase().contains(busqueda)
                    || productos.get(i).getCategoria().toLowerCase().contains(busqueda)
-                   || productos.get(i).getMarca().toLowerCase().contains(busqueda)){
+                   || productos.get(i).getMarca().toLowerCase().contains(busqueda)
+                   && productos.get(i).getFueraCatalogo().equals("n")){
                prodsBuscados.add(productos.get(i));
            }
            }

@@ -98,7 +98,9 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <a href="${contexto}/JSP/direcciones.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/></a>
-
+                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                    </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 "> 
                                     <form action="${contexto}/Administracion" method="post">
@@ -114,12 +116,12 @@
                                                         <td>${usu.email}</td>
                                                         <c:choose>
 
-                                                            <c:when test="${usu.bloqueado=='n'}">
-                                                                <td><input type="checkbox" name="usuBlo" checked="">
+                                                            <c:when test="${usu.bloqueado=='s'.charAt(0)}">
+                                                                <td><input type="checkbox" class="usuBlo" name="usuBlo" checked="">
                                                                 <input type="hidden" class="idU"  name="idU" value="${usu.idUsuario}"></td></td>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                <td><input type="checkbox" name="usuBlo">
+                                                                <td><input type="checkbox" class="usuBlo" name="usuBlo">
                                                                 <input type="hidden" class="idU"  name="idU" value="${usu.idUsuario}"></td></td>
                                                                 </c:otherwise>
                                                             </c:choose>
@@ -143,7 +145,11 @@
                 $('.usuBlo').click(function(event) {
                     alert("entro");
 			var bloUsu="";
-                        var chk = $(this).val();
+                         if($(this).prop('checked')){
+                        var chk = 'on';
+                    }else{
+                        var chk='off';
+                    }
                         var idU = $(this).parent().find('.idU').val();
                         alert(chk + idU);
 			// Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get

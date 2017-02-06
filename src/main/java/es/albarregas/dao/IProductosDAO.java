@@ -20,4 +20,5 @@ public interface IProductosDAO {
     public void updateProductosOfertas(String eleccion,int idProducto);
     public void updateProductosBloqueados(String eleccion,int idProducto);
     public void updateProductosPrecio(float precioNuevo,int idProducto);
+    public void updateProductosStock(int idProducto);
 }

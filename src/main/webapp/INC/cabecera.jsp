@@ -36,6 +36,7 @@
                             <c:out value="${error}" default=" "></c:out>
                             <c:out value="${error2}" default=" "></c:out>
                             <c:out value="${error3}" default=" "></c:out>
+                            <c:out value="${error4}" default=" "></c:out>
                             </div>
                             <div class="lg">
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login-modal"><a href="#">Login</a></button>

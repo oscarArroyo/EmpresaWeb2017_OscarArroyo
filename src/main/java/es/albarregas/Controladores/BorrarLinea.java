@@ -12,7 +12,6 @@ import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +39,7 @@ public class BorrarLinea extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOFactory daof = DAOFactory.getDAOFactory(1);
+        //Se borra la linea de pedido que ha seleccionado el usuario. Se borra de la base de datos y de la sesión.
         ILineasPedidosDAO lpdao = daof.getLineasPedidosDAO();
         IPedidosDAO pdao = daof.getPedidosDAO();
         HttpSession sesion = request.getSession();
@@ -53,6 +53,7 @@ public class BorrarLinea extends HttpServlet {
         ArrayList<LineasPedidos> listalp = lpdao.getLineasPedidos(where3);
         pedidos.setLineasPedidos(listalp);
         sesion.setAttribute("pedido", pedidos);
+        //Si no hay líneas de pedidos sobre ese pedido también se borra el pedido
         if(listalp.isEmpty()){
             pdao.deletePedido(where3);
             sesion.removeAttribute("pedido");

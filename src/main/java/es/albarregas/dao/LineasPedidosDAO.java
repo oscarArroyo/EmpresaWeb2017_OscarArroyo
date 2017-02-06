@@ -41,7 +41,8 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
     //Método para obtener todas las lineas de pedido de un pedido
     public ArrayList<LineasPedidos> getLineasPedidos(String where) {
         ArrayList<LineasPedidos> lista = new ArrayList();
-        consulta = "select IdPedido,NumeroLinea,IdProducto,Cantidad from lineaspedidos " + where;
+        consulta = "select IdPedido,NumeroLinea,IdProducto,Cantidad,precioUnitario from lineaspedidos " + where;
+        System.out.println("consulta2: "+consulta);
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
@@ -51,6 +52,7 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
                     lp.setNumeroLinea(resultado.getInt("NumeroLinea"));
                     lp.setIdProducto(resultado.getInt("IdProducto"));
                     lp.setCantidad(resultado.getInt("Cantidad"));
+                    lp.setPrecioUnitario(resultado.getFloat("precioUnitario"));
                     lista.add(lp);
                 }
             }
@@ -102,7 +104,6 @@ public class LineasPedidosDAO implements ILineasPedidosDAO{
     //Método para poner el precio unitario en su lineaPedido correspondiente
     public void updateLineaPedidoPrecio(LineasPedidos lp, String where) {
         try {
-
             consulta = "update lineaspedidos set precioUnitario=? "+where;
             preparada = ConnectionFactory.getConnection().prepareStatement(consulta);
             preparada.setFloat(1, lp.getPrecioUnitario());

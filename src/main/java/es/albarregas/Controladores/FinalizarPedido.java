@@ -24,9 +24,9 @@ import es.albarregas.dao.IProvinciasDAO;
 import es.albarregas.dao.IPueblosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -126,18 +126,32 @@ public class FinalizarPedido extends HttpServlet {
            IProductosDAO prdao= daof.getProductosDAO();
            IGeneralDAO gendao=daof.getGeneralDAO();
            ILineasPedidosDAO lpdao=daof.getLineasPedidosDAO();
+           Double base=0.0;
            Pedidos pedido =(Pedidos) sesion.getAttribute("pedido");
            Clientes cli =(Clientes) sesion.getAttribute("cliente");
            pedido.setIdCliente(cli.getIdCliente());
+           ServletContext contexto=request.getServletContext();
+           ArrayList<Productos> listap=(ArrayList)contexto.getAttribute("prods");
            pedido.setEstado('r');
            ArrayList<LineasPedidos> listalp = (ArrayList)sesion.getAttribute("listalp");
            for (int i = 0; i < listalp.size(); i++) {
                String where = "where idProducto= "+listalp.get(i).getIdProducto();
                Productos producto = prdao.getOne(where);
+               if(producto.getStock()-listalp.get(i).getCantidad()<0){
+                   pedido.setEstado('p');
+               }else{
+               
                producto.setStock(producto.getStock()-listalp.get(i).getCantidad());
-               String where2="where idPedido="+pedido.getIdPedido();
+               }
+               for(int j=0;j<listap.size();j++){
+               if(listalp.get(i).getIdProducto()==listap.get(j).getIdProducto()){
+                    listap.get(i).setStock(producto.getStock());
+               }
+               }
+               String where2="where idPedido="+pedido.getIdPedido()+" and numeroLinea="+(i+1);
                Productos prod=prdao.getOne(where);
                listalp.get(i).setPrecioUnitario((float)prod.getPrecioUnitario());
+               base+=listalp.get(i).getPrecioUnitario()*listalp.get(i).getCantidad();
                lpdao.updateLineaPedidoPrecio(listalp.get(i), where2);
                prdao.updateProductos(producto);
            }
@@ -146,10 +160,31 @@ public class FinalizarPedido extends HttpServlet {
            pedido.setIva(gen.getIva());
            int idUser=Integer.parseInt(String.valueOf(sesion.getAttribute("dirUsu")));
            pedido.setIdDireccion(idUser);
+           pedido.setBaseImponible(base);
            pdao.updatePedido(pedido);
+           contexto.setAttribute("prods", listap);
+           request.setAttribute("lilp", listalp);
            sesion.removeAttribute("listalp");
            sesion.removeAttribute("pedido");
-           response.sendRedirect("index.jsp");
+           
+           
+           request.setAttribute("cli", cli);
+           request.setAttribute("ped", pedido);
+           
+           IDireccionesDAO ddao = daof.getDireccionesDAO();
+           String where="where idDireccion="+idUser;
+           Direcciones dir=ddao.getOne(where);
+           request.setAttribute("dir", dir);
+           IPueblosDAO pbdao=daof.getPueblosDAO();
+           String where2="where codigoPostal="+dir.getCodigoPostal();
+           Pueblos pueblo=pbdao.getOne(where2);
+           request.setAttribute("pue", pueblo);
+           IProvinciasDAO prodao = daof.getProvinciasDAO();
+           String where3="where idProvincia="+pueblo.getIdProvincia();
+           Provincias pro = prodao.getOne(where3);
+           request.setAttribute("pro", pro);
+           
+           request.getRequestDispatcher("JSP/factura.jsp").forward(request, response);
        }  
     }
 

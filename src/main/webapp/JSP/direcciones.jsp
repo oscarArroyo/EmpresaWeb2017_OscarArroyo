@@ -40,6 +40,10 @@
                                 <div class="col-xs-12 col-sm-4" align="center" > <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
                                     <a href="${contexto}/JSP/modificarDatos.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Modificar datos del usuario"/></a>
                                     <input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Añadir direccion"/>
+                                    <a href="${contexto}/HistorialCompras"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Historial de compras"/></a>
+                                    <c:if test="${sesion.tipo=='a'.charAt(0)}">
+                                    <a href="${contexto}/JSP/panelAdministrador.jsp"><input class="btn btn-info btn-pressure btn-sensitive botones" type="button" value="Panel administrador"/></a>
+                                    </c:if>
                                 </div>
                                 <div class=" col-xs-12 col-sm-8 direcciones"> 
                                     <table class="table table-user-information tabla-direcciones">

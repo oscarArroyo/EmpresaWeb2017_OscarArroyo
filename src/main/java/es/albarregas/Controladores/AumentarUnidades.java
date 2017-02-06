@@ -8,10 +8,8 @@ package es.albarregas.Controladores;
 import es.albarregas.beans.LineasPedidos;
 import es.albarregas.beans.Pedidos;
 import es.albarregas.dao.ILineasPedidosDAO;
-import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +40,8 @@ public class AumentarUnidades extends HttpServlet {
         ILineasPedidosDAO lpdao = daof.getLineasPedidosDAO();
         LineasPedidos lp=new LineasPedidos();
         HttpSession sesion = request.getSession();
-        
+        //Aumenta las unidades sobre la linea de pedido que seleccione el usuario desde 1 hasta stock. Estos cambios se insertan en la base de datos
+        // y también en la sesión. Se realiza mediante ajax
         Pedidos pedido =(Pedidos) sesion.getAttribute("pedido");
         String where = "where idPedido= "+pedido.getIdPedido()+ " and numeroLinea= "+request.getParameter("numeroLinea");
         lp.setCantidad(Integer.parseInt(request.getParameter("unidades")));

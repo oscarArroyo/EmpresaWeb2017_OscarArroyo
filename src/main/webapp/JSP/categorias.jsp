@@ -115,7 +115,7 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${prods}" var="productos">
-                            <c:if test="${productos.categoria==param.c}">
+                                <c:if test="${(productos.categoria==param.c) && (productos.fueraCatalogo=='n')}">
                                 <tr>
                                     <td><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><img class="imagenes" src="${contexto}/imagenesProductos/${productos.imagen}"/></a></td>
                                     <td class="txt"><a href="${contexto}/MostrarProductoCompleto?producto=${productos.idProducto}"><c:out value="${productos.denominacion}"/></a></td>

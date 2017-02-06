@@ -3,6 +3,7 @@ es\albarregas\dao\IImagenesDAO.class
 es\albarregas\Controladores\Buscador.class
 es\albarregas\daofactory\MySQLDAOFactory.class
 es\albarregas\dao\UsuariosDAO.class
+es\albarregas\Controladores\HistorialCompras.class
 es\albarregas\dao\GeneralDAO.class
 es\albarregas\Controladores\MostrarCarrito.class
 es\albarregas\dao\IDireccionesDAO.class
